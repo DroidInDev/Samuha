@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:titleMarginStart="12dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    <LinearLayout
+        android:id="@+id/uploadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/placeholder" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+                android:id="@+id/pick_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/image"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textStyle="normal"
+                app:font="@string/font_name_square"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_corner"/>
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+                android:id="@+id/pick_vdo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/video"
+                android:textColor="@color/white"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:textAllCaps="false"
+                android:gravity="center"
+                app:font="@string/font_name_square"
+                android:background="@drawable/rounded_corner"/>
+
+        </LinearLayout>
+        <RadioGroup
+            android:id="@+id/radioOptionsTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/events"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioContest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/cotest" />
+
+        </RadioGroup>
+        <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+            android:id="@+id/filename1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="3dp"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:hint="@string/tag"
+            app:font="@string/font_name_square" />
+
+        <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+            android:id="@+id/upload"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            app:font="@string/font_name_square"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_corner"/>
+    </LinearLayout>
+</RelativeLayout>

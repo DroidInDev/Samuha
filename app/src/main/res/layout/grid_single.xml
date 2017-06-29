@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/grid_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp">
+    </ImageView>
+
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/grid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/beta_now"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/grid_image"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:font="@string/font_name_roboto_bold">
+    </com.stgobain.samuha.CustomUserInterface.CustomFontTextView>
+
+</RelativeLayout>

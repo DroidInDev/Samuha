@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d4589</color>
+    <color name="colorPrimaryDark">#001f5b</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="grey">#faf8f8</color>
+    <color name="selectedTabColor">#494949</color>
+    <color name="text_tab_selected">#001f5b</color>
+    <color name="text_tab_unselected">#80000000</color>
+    <color name="event_date">#1d4589</color>
+    <color name="black">#000000</color>
+    <color name="bright_foreground_light_disabled">#80000000</color>
+    <color name="screen_background_light_transparent">#80ffffff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg_img">#7C4DFF</color>
+    <color name="fb_bg">#eeeff4</color>
+    <color name="grey_light">#f2ecec</color>
+    <color name="red">#F00</color>
+    <color name="green">#0F0</color>
+    <color name="blue">#00F</color>
+    <color name="yellow">#FF0</color>
+    <integer-array name="color_array">
+        <item>@color/red</item>
+        <item>@color/green</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+    </integer-array>
+    <!--<color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>-->
+</resources>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:titleMarginStart="12dp"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    <LinearLayout
+        android:id="@+id/uploadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar">
+
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/placeholder" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+                android:id="@+id/pick_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/image"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:textStyle="normal"
+                app:font="@string/font_name_square"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_corner"/>
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+                android:id="@+id/pick_vdo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/video"
+                android:textColor="@color/white"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:layout_margin="10dp"
+                android:textAllCaps="false"
+                app:font="@string/font_name_square"
+                android:background="@drawable/rounded_corner"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/selectTypeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:layout_marginTop="3dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:textAlignment="center"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="0.5"
+                android:text="@string/select_type"
+                app:font="@string/font_name_square" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/selectDepTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:textAlignment="center"
+                android:layout_weight="0.5"
+                android:layout_marginTop="3dp"
+                android:text="@string/select_family"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:font="@string/font_name_square" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/radioTypeOptionsTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioSinging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/Singing"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/music" />
+            <RadioButton
+                android:id="@+id/radioDance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/dance" />
+            <RadioButton
+                android:id="@+id/radioOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/other" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioFamilyOptionsTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:layout_marginStart="25dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radioFather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/father"
+                android:layout_gravity="start"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioMother"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/mother" />
+            <RadioButton
+                android:id="@+id/radioSon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/son" />
+            <RadioButton
+                android:id="@+id/radioDaughter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="start"
+                android:text="@string/daughter" />
+
+        </RadioGroup>
+        </LinearLayout>
+        </LinearLayout>
+        <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+            android:id="@+id/audDescr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="3dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="3dp"
+            android:textAlignment="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:maxLines="4"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:hint="@string/tag"
+            app:font="@string/font_name_square" />
+        <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+            android:id="@+id/upload"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            app:font="@string/font_name_square"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_corner"/>
+    </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

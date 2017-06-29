@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+    android:id="@+id/invite_family_txt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="20sp"
+    android:text="@string/invite_family"
+    android:layout_marginTop="30dp"
+    app:font="@string/font_name_square"
+    android:textStyle="normal"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"/>
+    <LinearLayout
+        android:id="@+id/layout_sigin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/invite_family_txt"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <FrameLayout
+            android:id="@+id/layout_edittxt_mobileno1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/edittext_bottom_line" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+                android:id="@+id/etxtmobileno1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#00000000"
+                android:drawableLeft="@drawable/mobile_icon"
+                android:drawablePadding="10dp"
+                android:ellipsize="start"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:hint="@string/enter_mobile_no"
+                android:inputType="number|numberDecimal"
+                android:digits="0123456789"
+                android:maxLength="10"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                app:font="@string/font_name_square"
+                android:textStyle="normal" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_edittxt_mobileno2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/edittext_bottom_line" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+                android:id="@+id/etxtmobileno2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#00000000"
+                android:drawableLeft="@drawable/mobile_icon"
+                android:drawablePadding="10dp"
+                android:ellipsize="start"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:hint="@string/enter_mobile_no"
+                android:inputType="number|numberDecimal"
+                android:digits="0123456789"
+                android:maxLength="10"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                app:font="@string/font_name_square"
+                android:textStyle="normal" />
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/layoutDialogBtn"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/btnInvite"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:text="@string/invite"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginRight="5dp"
+                android:onClick="onInviteClicked"
+                android:background="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/btnSkip"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:text="@string/skip"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:onClick="onSkipClicked"
+                android:background="@color/grey_light"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

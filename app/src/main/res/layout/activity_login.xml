@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_signup_email"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+<ImageView
+    android:id="@+id/imgLoginLogo"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_marginTop="30dp"
+    android:src="@drawable/login_screen_logo"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:id="@+id/layout_sigin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/imgLoginLogo"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <FrameLayout
+            android:id="@+id/layout_edittxt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/edittext_bottom_line" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+                android:id="@+id/etxtMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#00000000"
+                android:drawableLeft="@drawable/mobile_icon"
+                android:drawablePadding="10dp"
+                android:ellipsize="start"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:hint="@string/enter_mobile_no"
+                android:inputType="number|numberDecimal"
+                android:digits="0123456789"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/etxtEmployeeId"
+                android:textStyle="normal"
+                app:font="@string/font_name_square"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_edittxt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/edittext_bottom_line" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+                android:id="@+id/etxtEmployeeId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#00000000"
+                android:drawableLeft="@drawable/employee_icon"
+                android:drawablePadding="10dp"
+                android:ellipsize="start"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:hint="@string/enter_employee_id"
+                android:inputType="text|textCapCharacters|textCapWords|textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textNoSuggestions|textUri|textEmailAddress|textEmailSubject|textShortMessage|textLongMessage|textPersonName|textPostalAddress|textPassword|textVisiblePassword|textWebEditText|textFilter|textPhonetic|textWebEmailAddress|textWebPassword|phone"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:textStyle="normal"
+                android:imeOptions="actionDone"
+                app:font="@string/font_name_square"/>
+        </FrameLayout>
+    </LinearLayout>
+    <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+        android:id="@+id/btnLogin"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/layout_sigin"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginRight="5dp"
+        android:onClick="onLoginClicked"
+        app:font="@string/font_name_square"
+        android:background="@drawable/rounded_corner"/>
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/codeLoginTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/event_date"
+        android:textSize="14sp"
+        android:text="@string/login_using_code"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:clickable="true"
+        app:font="@string/font_name_square"
+        android:layout_below="@+id/btnLogin"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

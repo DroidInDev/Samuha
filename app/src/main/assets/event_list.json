@@ -1,0 +1,89 @@
+{
+  "events" : [
+    {
+      "id": "101",
+      "event_date":"July 2, 2017",
+      "event_name": "Family Day-1",
+      "event_location":"Sriperumbudur",
+      "lat": "77.12332",
+      "lng": "23.456"
+    },
+    {
+      "id": "102",
+      "event_date":"July 9, 2017 ",
+      "event_name": "Family Day-2",
+      "event_location":"Chennai",
+      "lat": "77.12332",
+      "lng": "23.456"
+    },
+    {
+      "id": "103",
+      "event_date":"July 22, 2017  ",
+      "event_name": "The Grand Finale",
+      "event_location":"Chennai",
+      "lat": "77.12332",
+      "lng": "23.456"
+    }
+  ]
+
+}
+/*
+private void requestWebservice(String request, int reqID, String url) {
+this.mReceiver = new NetworkServiceResultReceiver(new Handler());
+this.mReceiver.setReceiver(this);
+Intent intent = new Intent("android.intent.action.SYNC", null, getActivity(), NetworkService.class);
+intent.putExtra("url", url);
+intent.putExtra(KEY_RECIVER, this.mReceiver);
+intent.putExtra(KEY_REQUEST_ID, String.valueOf(reqID));
+intent.putExtra("request", request);
+getActivity().startService(intent);
+}
+@Override
+public void onReceiveResult(int resultCode, Bundle resultData) {
+switch (resultCode) {
+case STATUS_RUNNING:
+Log.d("LOGIN", "STATUS_RUNNING");
+break;
+case STATUS_FINISHED:
+Log.d("LOGIN", "FINISHED");
+String result = resultData.getString(KEY_RESULT);
+String status = "0";
+String resultString;
+JSONObject response;
+
+try {
+status = new JSONObject(result).getString(KEY_ERROR);
+resultString = new JSONObject(result).getString("response");
+response = new JSONObject(resultString);
+
+} catch (JSONException e) {
+e.printStackTrace();
+}
+if (status.equals("false")) {
+*/
+/* SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, true);
+ SharedPrefsUtils.setStringPreference(LoginActivity.this,SKEY_ID,id);
+ SharedPrefsUtils.setStringPreference(LoginActivity.this,SKEY_NAME,name);
+ SharedPrefsUtils.setStringPreference(LoginActivity.this,SKEY_TEAM_ID,teamId);
+ SharedPrefsUtils.setStringPreference(LoginActivity.this,SKEY_DEP_ID,departmentId);
+ SharedPrefsUtils.setStringPreference(LoginActivity.this,SKEY_USER_TYPE,userType);
+ Intent i = new Intent(LoginActivity.this, InviteFamilyActivity.class);
+ startActivity(i);
+ overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+ finish();*//*
+
+} else {
+*/
+/* SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, false);
+ AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");*//*
+
+}
+Log.d("LOGIN", "FINISHED status " + status + " " );
+break;
+case STATUS_ERROR:
+AppUtils.showAlertDialog(getActivity(), "Login Failed. Try Again!");
+Log.d("LOGIN", "STATUS_ERROR");
+Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
+break;
+}
+}*/

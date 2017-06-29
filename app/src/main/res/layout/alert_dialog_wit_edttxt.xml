@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/txtAlerTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@color/event_date"
+        android:textSize="14sp"
+        android:text="@string/enter_code"
+        android:textStyle="bold"
+        app:font="@string/font_name_square" />
+    <com.stgobain.samuha.CustomUserInterface.CustomEditTextView
+        android:id="@+id/etxtCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:drawablePadding="10dp"
+        android:ellipsize="start"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:focusableInTouchMode="true"
+        android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:hint="@string/code_here"
+        android:inputType="numberDecimal"
+        android:digits="0123456789"
+        android:maxLines="1"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:maxLength="5"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@+id/etxtEmployeeId"
+        android:textStyle="normal"
+        app:font="@string/font_name_square"/>
+</LinearLayout>

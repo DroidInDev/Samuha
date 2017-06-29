@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layoutHubContests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/imgScoreAttr"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:src="@drawable/date_white_icon" />
+
+        <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+            android:id="@+id/txtContestName"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/score"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:font="@string/font_name_square" />
+
+    </LinearLayout>
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/event_date"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:text="july2017"
+        android:textStyle="bold"
+        app:font="@string/font_name_square"
+        android:layout_below="@+id/layoutHubContests"
+        android:layout_alignStart="@+id/imgLocationIcon" />
+    <ImageView
+        android:id="@+id/imgContestIcon"
+        android:src="@drawable/contests_cup"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/txtDate"
+        android:layout_toStartOf="@+id/txtEventName" />
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/txtEventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/selectedTabColor"
+        android:layout_marginLeft="5dp"
+        android:textSize="12sp"
+        android:text="Kids Party"
+        android:textStyle="normal"
+        app:font="@string/font_name_square"
+        android:layout_toEndOf="@+id/imgLocationIcon"
+        android:layout_alignBottom="@+id/imgContestIcon" />
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/txtEventLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:text="Chennai egmore"
+        android:textStyle="normal"
+        app:font="@string/font_name_square"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/txtEventName"
+        android:layout_toEndOf="@+id/imgLocationIcon" />
+    <ImageView
+        android:id="@+id/imgLocationIcon"
+        android:src="@drawable/location_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="9dp"
+        android:layout_alignBottom="@+id/txtEventLocationName"
+        android:layout_alignStart="@+id/layoutHubContests" />
+</RelativeLayout>

@@ -1,0 +1,41 @@
+{
+  "team" : [
+    {
+      "id": "101",
+      "team_name":"Tech-NOW",
+      "captain_name": "Aanchal kaushik",
+      "vice_captain_name":"Jagadeesh",
+      "department":
+      ["Sekurit Tempered","Purchase","CNM - Glass",
+        "Quality - Glass","Sekurit-Stores/ NPD/S&M/E&I/AGR","IWD"]
+    },
+    {
+      "id": "102",
+      "team_name":"Digi-NOW",
+      "captain_name": "Anto M Sujel",
+      "vice_captain_name":"Nagaraj S",
+      "department":
+      ["Float Line-1","Solutions","Infinity 1 & 2",
+        "IT @ WGC","Capex Projects","Sekurit SCM","MT's - 2017 Batch1"]
+    },
+    {
+      "id": "103",
+      "team_name":"Cyber-NOW",
+      "captain_name": "Surendran",
+      "vice_captain_name":"Ishani Pramanick",
+      "department":
+      ["Sekurit Tempered","EHS @ WGC","HR-Operations @ WGC",
+        "Sekurit Quality","Finance @ WGC","WCM @ WGC","MT's - 2017 Batch2"]
+    },
+    {
+      "id": "104",
+      "team_name":"Beta-NOW",
+      "captain_name": "Vijayakumar K C",
+      "vice_captain_name":"Nagaraj S",
+      "department":
+      ["Float Line-2","TADA","Stores-Glass",
+        "Planning & CSD","Egmore Office (All functions including S&M)","Dolomite","Inspire","Tech Services & IUCS"]
+    }
+  ]
+
+}

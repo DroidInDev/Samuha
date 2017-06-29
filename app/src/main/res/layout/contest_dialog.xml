@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogRow"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/score"
+        android:textColor="@color/text_tab_unselected"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:layout_margin="5dp"
+        app:font="@string/font_name_square" />
+
+</LinearLayout>
+
+
+<!--
+//https://stackoverflow.com/questions/15762905/how-can-i-display-a-list-view-in-an-android-alert-dialog-->

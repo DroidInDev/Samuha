@@ -1,0 +1,33 @@
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+        android:id="@+id/txtDeparment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Purchase"
+        app:font="@string/font_name_roboto_medium" />
+</LinearLayout>-->
+<com.stgobain.samuha.CustomUserInterface.CustomFontTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rowTextView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:font="@string/font_name_square"
+    android:textStyle="normal"
+    android:textSize="14sp">
+</com.stgobain.samuha.CustomUserInterface.CustomFontTextView>
+
+<!--home
+theme-future
+muscots- family
+teams
+events-->
