@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#1d4589</color>
     <color name="colorPrimaryDark">#001f5b</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#1d4589</color>
     <color name="grey">#faf8f8</color>
     <color name="selectedTabColor">#494949</color>
     <color name="text_tab_selected">#001f5b</color>
@@ -12,6 +12,7 @@
     <color name="bright_foreground_light_disabled">#80000000</color>
     <color name="screen_background_light_transparent">#80ffffff</color>
     <color name="white">#FFFFFF</color>
+    <color name="bg_grey">#E9EDEE</color>
     <color name="bg_img">#7C4DFF</color>
     <color name="fb_bg">#eeeff4</color>
     <color name="grey_light">#f2ecec</color>

@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
-import static com.stgobain.samuha.Utility.AppUtils.KEY_IS_LOGED_IN;
+import static com.stgobain.samuha.utility.AppUtils.KEY_IS_LOGED_IN;
 
 public class SamuhaSplashActivity extends AppCompatActivity {
     MediaPlayer music;

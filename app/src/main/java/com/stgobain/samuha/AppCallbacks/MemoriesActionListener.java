@@ -7,4 +7,5 @@ package com.stgobain.samuha.AppCallbacks;
 public interface MemoriesActionListener {
     void likeClicked(String memoriesId);
     void videoSelected(String videoUrl);
+    void imageClicked(String imgUrl);
 }

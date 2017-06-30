@@ -1,4 +1,4 @@
-package com.stgobain.samuha.Utility;
+package com.stgobain.samuha.utility;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -70,7 +70,7 @@ public class AppUtils {
     public static final String INVITE_FAMILY_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/invite";
     public static final String EVENTS_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getevents";
     public static final String TEAMS_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getteams";
-    public static final String ANNOUNCEMENT_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getupdates_annonucement";
+    public static final String ANNOUNCEMENT_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getannonucement";
     public static final String POST_MEMORIES= "http://www.thanjavurkingslionsclub.com/sandbox/v1/postmemories";
     public static final String GET_CONTEXT_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getcontests";
     public static final String GET_EVENTS_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getevents";
@@ -81,7 +81,7 @@ public class AppUtils {
     public static final String FEED_SAB_LIKE_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/votepostsab";
     public static final String CODE_LOGIN_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/guestlogin";
     public static final String HUB_CONTESTS_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getcontests";
-    public static final String HUB_UPDATESS_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getupdates_annonucement";
+    public static final String HUB_UPDATESS_URL= "http://www.thanjavurkingslionsclub.com/sandbox/v1/getupdates";
 
 
     public static boolean isNetworkAvailable(Context context) {

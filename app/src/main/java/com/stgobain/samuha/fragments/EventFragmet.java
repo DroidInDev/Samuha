@@ -17,12 +17,12 @@ import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.SamuhaEvent;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.EventAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 import com.stgobain.samuha.paginate.Paginate;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,16 +30,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.EVENTS_URL;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_EVENTS;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.EVENTS_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_EVENTS;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 15-06-2017.
@@ -63,6 +63,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
     protected boolean customLoadingListItem = false;
     private static final int GRID_SPAN = 3;
     private String isGrandFinalEventActive;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -77,7 +78,6 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
         comingSoonTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvntCn);
         internalEvtTxt.setVisibility(View.INVISIBLE);
         comingSoonTxt.setVisibility(View.INVISIBLE);
-
         return layout;
     }
 
@@ -97,6 +97,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
             e.printStackTrace();
         }*/
         requestWebservice(jsonObject.toString(), SERVICE_REQUEST_EVENTS, EVENTS_URL);
+
     }
 
     @Override
@@ -182,9 +183,14 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                         eventAdaptor.setEvents(eventArraylist);
                         internalEvtTxt.setVisibility(View.VISIBLE);
                         comingSoonTxt.setVisibility(View.VISIBLE);
+                        if(isGrandFinalEventActive.equals(true)){
+                            requestGrandFinalEvents();
+                        }
                     }
                 } else {
-
+                    if (this.progressDialog != null) {
+                        progressDialog.dismiss();
+                    }
                     AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
                 }
                 Log.d("LOGIN", "FINISHED status " + status + " ");
@@ -198,6 +204,10 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
                 break;
         }
+    }
+
+    private void requestGrandFinalEvents() {
+
     }
 
    /* public ArrayList<SamuhaEvent> loadEventsFromAsset() {

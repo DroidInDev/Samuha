@@ -112,6 +112,7 @@ public class SabFeedAdapter  extends RecyclerView.Adapter<SabFeedAdapter.ViewHol
             playImg =(ImageView)itemView.findViewById(R.id.imgplay);
             playImg.setOnClickListener(this);
             likeImageView.setOnClickListener(this);
+            contnetImg.setOnClickListener(this);
         }
 
         @Override
@@ -126,6 +127,12 @@ public class SabFeedAdapter  extends RecyclerView.Adapter<SabFeedAdapter.ViewHol
                 mActionListener.likeClicked(memeoriesData.getId());
             }else if(view.getId()==R.id.imgplay){
                 mActionListener.videoSelected(memeoriesData.getFileName());
+            }else if(view.getId()==R.id.imgMemory){
+                String mediaType =   samuhaMemoryArrayList.get(position).getFileType();
+                if(mediaType.equals("image")){
+                    String imgUrl = samuhaMemoryArrayList.get(position).getFileName();
+                    mActionListener.imageClicked(imgUrl);
+                }
             }
         }
     }

@@ -34,4 +34,5 @@
         android:layout_marginTop="3dp"
         android:textStyle="bold"
         app:font="@string/font_name_square" />
+
 </RelativeLayout>

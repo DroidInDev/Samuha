@@ -1,103 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    app:cardElevation="2dp"
+    android:layout_margin="2dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/bright_foreground_light_disabled"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-
-    <LinearLayout
-        android:id="@+id/layoutScore"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imgScoreAttr"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.1"
-            android:src="@drawable/event_box" />
+        android:padding="2dp"
+        android:layout_margin="5dp">
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/layoutAnnounce"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.6">
-            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-                android:id="@+id/txttodayEventName"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:gravity="center_vertical"
-                android:text="@string/score"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginStart="5dp"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:font="@string/font_name_square" />
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imgCalendar"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/date_icon" />
-            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-                android:id="@+id/txttodayEventDate"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/imgCalendar"
-                android:layout_marginStart="5dp"
-                android:text="@string/score"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                app:font="@string/font_name_square" />
-            </RelativeLayout>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="2dp"
-            android:layout_weight="0.3">
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imgLocationIconAnnounce"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentBottom="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/location_icon" />
+                android:id="@+id/imgAnnounceAttr"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.2"
+                android:src="@drawable/event_box" />
 
-            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-                android:id="@+id/txttodayEventLocation"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_toEndOf="@+id/imgLocationIconAnnounce"
-                android:text="Hello"
-                android:textColor="@color/text_tab_unselected"
-                android:gravity="bottom"
-                android:layout_marginStart="5dp"
-                android:textSize="10sp"
-                android:textStyle="normal"
-                android:maxLines="1"
-                app:font="@string/font_name_square"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/layoutScore"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="4dp"
-        android:background="@color/bright_foreground_light_disabled" />
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:layout_weight="0.8">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                    android:id="@+id/txttodayEventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/score"
+                    android:textColor="@color/colorPrimary"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:font="@string/font_name_square" />
+
+
+
+                <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                    android:id="@+id/txttodayEventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/score"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    app:font="@string/font_name_square" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/bg_grey" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imgusericon"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/location_icon" />
+                    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                        android:id="@+id/txttodayEventLocation"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/score"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:maxLines="1"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        app:font="@string/font_name_square" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- <FrameLayout
+                 android:layout_width="40dp"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginRight="8dp"
+                 android:layout_weight="0.2">
+                 <ImageView
+                     android:id="@+id/imgRightArrowScore"
+                     android:layout_gravity="center_vertical"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:scaleType="fitCenter"
+                     android:src="@color/colorPrimary" />
+                 <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                     android:id="@+id/txtScore"
+                     android:layout_margin="0.5dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:text="@string/score"
+                     android:textColor="@color/white"
+                     android:textSize="12sp"
+                     android:gravity="center"
+                     android:textStyle="normal"
+                     app:font="@string/font_name_square" />
+             </FrameLayout>-->
+        </LinearLayout>
+
+    </RelativeLayout>
+    <!--  <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_below="@+id/layoutAnnounce"
+          android:layout_marginTop="8dp"
+          android:background="@color/bright_foreground_light_disabled" />-->
+</android.support.v7.widget.CardView>

@@ -21,8 +21,8 @@ import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.SabData;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.SabFeedAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
@@ -36,18 +36,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.FEED_SAB_LIKE_URL;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SAB_FEED_URL;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_FEED_SAB;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_SAB_FEED_LIKE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.FEED_SAB_LIKE_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SAB_FEED_URL;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_FEED_SAB;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_SAB_FEED_LIKE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 28-06-2017.
@@ -85,7 +85,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Bundle extras = getIntent().getExtras();
-        String teamTittle = "Auditions";
+        String teamTittle = "Gallery";
         getSupportActionBar().setTitle(teamTittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         memoryRecyclerView = (RecyclerView) findViewById(R.id.recylerviewMemories);
@@ -211,6 +211,14 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
         startActivity(intent);
 
     }
+
+    @Override
+    public void imageClicked(String imgUrl) {
+        Intent intent = new Intent(SabGalleryActivity.this,ImageViewActivity.class);
+        intent.putExtra("IMGURL",imgUrl);
+        startActivity(intent);
+    }
+
     private void requestWebservice(String request, int reqID, String url) {
         this.mReceiver = new NetworkServiceResultReceiver(new Handler());
         this.mReceiver.setReceiver(this);

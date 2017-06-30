@@ -16,8 +16,8 @@ import android.view.View;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.SamuhaEvent;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.TodayEventAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
@@ -25,19 +25,21 @@ import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import static com.stgobain.samuha.Utility.AppUtils.EVENTS_URL;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_TODAY_EVENT;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_EVENT_DATE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.EVENTS_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_TODAY_EVENT;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_EVENT_DATE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 25-06-2017.
@@ -81,13 +83,14 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
             this.progressDialog.show();
         }
         String userId = SharedPrefsUtils.getStringPreference(TodayEventActivity.this, SKEY_ID);
+        String sDate = getDate();
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(SKEY_ID, userId);
-            jsonObject.put(SKEY_EVENT_DATE, "");
+            jsonObject.put(SKEY_EVENT_DATE,sDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d("TODAY_EVENT ", jsonObject.toString());
         requestWebservice(jsonObject.toString(), SERVICE_REQUEST_TODAY_EVENT, EVENTS_URL);
     }
     private void requestWebservice(String request, int reqID, String url) {
@@ -101,7 +104,11 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
         startService(intent);
     }
 
-
+    private String getDate(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(c.getTime());
+    }
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
@@ -113,7 +120,7 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
                 String result = resultData.getString(KEY_RESULT);
                 String status = "0";
                 JSONObject response;
-
+                Log.d("TODAY_EVENT ", result);
                 try {
                     status = new JSONObject(result).getString(KEY_ERROR);
                     //resultString = new JSONObject(result).getString("response");
@@ -137,9 +144,15 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
                    /* SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, false);
                     AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");*/
                 }
+                if (this.progressDialog != null) {
+                    this.progressDialog.dismiss();
+                }
                 Log.d("LOGIN", "FINISHED status " + status + " " );
                 break;
             case STATUS_ERROR:
+                if (this.progressDialog != null) {
+                    this.progressDialog.dismiss();
+                }
                 AppUtils.showAlertDialog(TodayEventActivity.this, AppUtils.NETWORK_ERROR);
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));

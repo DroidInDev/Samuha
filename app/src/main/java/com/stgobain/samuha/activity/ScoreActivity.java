@@ -16,8 +16,8 @@ import android.view.View;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.Team;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.ScoreAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
@@ -27,17 +27,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_TEAMS_SCORE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_EVENT_DATE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
-import static com.stgobain.samuha.Utility.AppUtils.TEAMS_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_TEAMS_SCORE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_EVENT_DATE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.TEAMS_URL;
 
 /**
  * Created by vignesh on 24-06-2017.

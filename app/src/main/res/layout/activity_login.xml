@@ -4,34 +4,31 @@
     android:id="@+id/layout_signup_email"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/bg_grey">
 <ImageView
     android:id="@+id/imgLoginLogo"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:layout_marginTop="30dp"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_marginTop="20dp"
     android:src="@drawable/login_screen_logo"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true" />
     <LinearLayout
         android:id="@+id/layout_sigin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/imgLoginLogo"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:background="@color/white"
+        android:padding="20dp"
+        android:layout_below="@+id/imgLoginLogo"
+        android:layout_centerHorizontal="true">
 
         <FrameLayout
             android:id="@+id/layout_edittxt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -66,8 +63,6 @@
             android:id="@+id/layout_edittxt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp">
 
             <ImageView
@@ -96,22 +91,22 @@
                 android:imeOptions="actionDone"
                 app:font="@string/font_name_square"/>
         </FrameLayout>
+
+        <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+            android:id="@+id/btnLogin"
+            android:layout_width="180dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_corner"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:onClick="onLoginClicked"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:font="@string/font_name_square" />
     </LinearLayout>
-    <com.stgobain.samuha.CustomUserInterface.CustomFontButton
-        android:id="@+id/btnLogin"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/layout_sigin"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginRight="5dp"
-        android:onClick="onLoginClicked"
-        app:font="@string/font_name_square"
-        android:background="@drawable/rounded_corner"/>
+
     <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
         android:id="@+id/codeLoginTxt"
         android:layout_width="wrap_content"
@@ -124,6 +119,6 @@
         android:textStyle="bold"
         android:clickable="true"
         app:font="@string/font_name_square"
-        android:layout_below="@+id/btnLogin"
+        android:layout_below="@+id/layout_sigin"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

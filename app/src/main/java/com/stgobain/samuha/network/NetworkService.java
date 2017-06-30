@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
+import com.stgobain.samuha.utility.AppUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -18,12 +18,12 @@ import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 22-06-2017.

@@ -1,4 +1,4 @@
-package com.stgobain.samuha.Utility;
+package com.stgobain.samuha.utility;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,25 +7,25 @@ import android.content.Context;
  * Created by vignesh on 27-06-2017.
  */
 
-public class SamuhaApplication extends Application {
+public class samuhaApplication extends Application {
     public static Context appContext;
     public static byte[] imageByteArray = null;
-    private static SamuhaApplication mAppInstance = null;
+    private static samuhaApplication mAppInstance = null;
     public static String strActiveUserRoomID = null;
-    public String TAG = "SamuhaApplication";
+    public String TAG = "samuhaApplication";
 
-    public static SamuhaApplication getInstance() {
+    public static samuhaApplication getInstance() {
         return mAppInstance;
     }
 
-    public static SamuhaApplication get() {
+    public static samuhaApplication get() {
         return get(appContext);
     }
     public static Context getAppContext() {
         return mAppInstance.getApplicationContext();
     }
-    public static SamuhaApplication get(Context context) {
-        return (SamuhaApplication) context.getApplicationContext();
+    public static samuhaApplication get(Context context) {
+        return (samuhaApplication) context.getApplicationContext();
     }
 
     public static byte[] getImageByteArray() {

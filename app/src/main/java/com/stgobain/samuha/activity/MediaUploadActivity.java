@@ -34,8 +34,8 @@ import android.widget.Toast;
 import com.stgobain.samuha.Model.ContextData;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 
@@ -51,21 +51,21 @@ import java.util.ArrayList;
 
 import life.knowledge4.videotrimmer.utils.FileUtils;
 
-import static com.stgobain.samuha.Utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
-import static com.stgobain.samuha.Utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_MESSAGE;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.POST_MEMORIES;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_GET_CONTEXT_TO_UPLOAD;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_POST_MEMORIES;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
+import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_MESSAGE;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.POST_MEMORIES;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_CONTEXT_TO_UPLOAD;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_POST_MEMORIES;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 25-06-2017.

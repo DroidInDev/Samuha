@@ -33,8 +33,10 @@ public class AnnouncementAdapter  extends RecyclerView.Adapter<AnnouncementAdapt
     @Override
     public void onBindViewHolder(ViewHolderAnnouncemnet holder, int position) {
         Announcement currentEvent = samuhaAnnounceList.get(position);
-        holder.announceNameTxt.setText(currentEvent.getTitle());
-        holder.anounceDescriptiontxt.setText(currentEvent.getUpdates());
+        holder.announceNameTxt.setText(currentEvent.getEventName());
+        holder.anounceDescriptiontxt.setText(currentEvent.getEventDate()+"  ["+currentEvent.getResults()+"]");
+        holder.teamName.setText(currentEvent.getTeamName());
+        holder.teamScore.setText(currentEvent.getTeamScore());
 
     }
 
@@ -54,12 +56,14 @@ public class AnnouncementAdapter  extends RecyclerView.Adapter<AnnouncementAdapt
 
         CustomFontTextView announceNameTxt;
         CustomFontTextView anounceDescriptiontxt;
-
+        CustomFontTextView teamName;
+        CustomFontTextView teamScore;
         public ViewHolderAnnouncemnet(View itemView) {
             super(itemView);
             announceNameTxt = (CustomFontTextView)itemView.findViewById(R.id.txtAnnounceName);
             anounceDescriptiontxt = (CustomFontTextView)itemView.findViewById(R.id.txtAnnounceDescription);
-
+            teamName = (CustomFontTextView)itemView.findViewById(R.id.txtwinnerName);
+            teamScore = (CustomFontTextView)itemView.findViewById(R.id.txtWinTeamName);
 
         }
     }

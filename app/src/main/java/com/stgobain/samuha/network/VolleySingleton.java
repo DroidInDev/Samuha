@@ -6,14 +6,14 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.stgobain.samuha.Utility.SamuhaApplication;
+import com.stgobain.samuha.utility.samuhaApplication;
 
 public class VolleySingleton{
     private static VolleySingleton sInstance=null;
         private ImageLoader mImageLoader;
         private RequestQueue mRequestQueue;
         private VolleySingleton(){
-            mRequestQueue=Volley.newRequestQueue(SamuhaApplication.getAppContext());
+            mRequestQueue=Volley.newRequestQueue(samuhaApplication.getAppContext());
             mImageLoader=new ImageLoader(mRequestQueue,new ImageLoader.ImageCache() {
 
                 private LruCache<String, Bitmap> cache=new LruCache<>((int)(Runtime.getRuntime().maxMemory()/1024)/8);

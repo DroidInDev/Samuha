@@ -1,55 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="2dp"
-    android:layout_width="match_parent"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+app:cardElevation="2dp"
+android:layout_margin="2dp"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+android:background="@color/bright_foreground_light_disabled"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+
+<RelativeLayout
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/screen_background_light_transparent">
-
-    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-        android:id="@+id/txtDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="@color/event_date"
-        android:textSize="14sp"
-        android:text="july2017"
-        android:textStyle="bold"
-        app:font="@string/font_name_square" />
-
-    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-        android:id="@+id/txtEventName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="@color/selectedTabColor"
-        android:textSize="12sp"
-        android:text="Kids Party"
-        android:textStyle="normal"
-        android:layout_below="@id/txtDate"
-        app:font="@string/font_name_square" />
-    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-        android:id="@+id/txtEventLocationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:text="Chennai egmore"
-        android:textStyle="normal"
-        android:layout_below="@id/txtEventName"
-        app:font="@string/font_name_square" />
-    <ImageView
-        android:id="@+id/imgLocationIcon"
-        android:src="@drawable/location_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="18dp"
-        android:layout_below="@+id/txtDate"
-        android:layout_alignParentEnd="true" />
-    <View
+    android:padding="2dp"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:id="@+id/layoutAnnounce"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/txtEventLocationName"
-        android:background="@color/bright_foreground_light_disabled" />
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgAnnounceAttr"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.2"
+            android:src="@drawable/event_box" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_weight="0.8">
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txttodayEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/score"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:font="@string/font_name_square" />
+
+
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txttodayEventDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:text="@string/score"
+                android:textColor="@color/colorPrimary"
+                android:maxLines="10"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:font="@string/font_name_square" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/bg_grey" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imgusericon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.2"
+                    android:src="@drawable/location_icon" />
+                <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                    android:id="@+id/txttodayEventLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/score"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    android:layout_weight="0.4"
+                    app:font="@string/font_name_square" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- <FrameLayout
+             android:layout_width="40dp"
+             android:layout_height="match_parent"
+             android:layout_gravity="center_vertical"
+             android:layout_marginRight="8dp"
+             android:layout_weight="0.2">
+             <ImageView
+                 android:id="@+id/imgRightArrowScore"
+                 android:layout_gravity="center_vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:scaleType="fitCenter"
+                 android:src="@color/colorPrimary" />
+             <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                 android:id="@+id/txtScore"
+                 android:layout_margin="0.5dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:text="@string/score"
+                 android:textColor="@color/white"
+                 android:textSize="12sp"
+                 android:gravity="center"
+                 android:textStyle="normal"
+                 app:font="@string/font_name_square" />
+         </FrameLayout>-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layoutAnnounce"></LinearLayout>
 </RelativeLayout>
+<!--  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_below="@+id/layoutAnnounce"
+      android:layout_marginTop="8dp"
+      android:background="@color/bright_foreground_light_disabled" />-->
+</android.support.v7.widget.CardView>

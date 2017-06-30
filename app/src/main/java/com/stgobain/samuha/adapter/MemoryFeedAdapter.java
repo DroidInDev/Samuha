@@ -112,6 +112,7 @@ public class MemoryFeedAdapter  extends RecyclerView.Adapter<MemoryFeedAdapter.V
             playImg =(ImageView)itemView.findViewById(R.id.imgplay);
             playImg.setOnClickListener(this);
             likeImageView.setOnClickListener(this);
+            contnetImg.setOnClickListener(this);
         }
 
         @Override
@@ -126,8 +127,15 @@ public class MemoryFeedAdapter  extends RecyclerView.Adapter<MemoryFeedAdapter.V
                 mActionListener.likeClicked(memeoriesData.getId());
             }else if(view.getId()==R.id.imgplay){
                 mActionListener.videoSelected(memeoriesData.getFile_name());
+            }else if(view.getId()==R.id.imgMemory){
+                String mediaType =   samuhaMemoryArrayList.get(position).getFile_type();
+                if(mediaType.equals("image")){
+                    String imgUrl = samuhaMemoryArrayList.get(position).getFile_name();
+                    mActionListener.imageClicked(imgUrl);
+                }
             }
         }
     }
+
 }
 

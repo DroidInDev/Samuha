@@ -1,10 +1,13 @@
 package com.stgobain.samuha.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.SamuhaEvent;
@@ -18,9 +21,11 @@ import java.util.ArrayList;
 
 public class TodayEventAdapter extends RecyclerView.Adapter<TodayEventAdapter.ViewHoldertodayEvent> {
     private LayoutInflater mInflater;
+    private Context context;
     private ArrayList<SamuhaEvent> todayEventList = new ArrayList<>();
     public TodayEventAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @Override
@@ -53,17 +58,36 @@ public class TodayEventAdapter extends RecyclerView.Adapter<TodayEventAdapter.Vi
         notifyDataSetChanged();
     }
 
-    public class ViewHoldertodayEvent extends RecyclerView.ViewHolder {
+    public class ViewHoldertodayEvent extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CustomFontTextView todayEventTxt;
         CustomFontTextView todayEventDatetxt;
         CustomFontTextView todayEventLocationTxt;
+        ImageView imgLoactionIcon;
         public ViewHoldertodayEvent(View itemView) {
             super(itemView);
             todayEventTxt = (CustomFontTextView)itemView.findViewById(R.id.txttodayEventName);
             todayEventDatetxt = (CustomFontTextView)itemView.findViewById(R.id.txttodayEventDate);
             todayEventLocationTxt =(CustomFontTextView)itemView.findViewById(R.id.txttodayEventLocation);
+            imgLoactionIcon =(ImageView)itemView.findViewById(R.id.imgusericon);
+            imgLoactionIcon.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if(view.getId()==R.id.imgusericon) {
+                String locationUrl =todayEventList.get(position).getEventLocation();
+                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(mapIntent);
+                }else if(view.getId()==R.id.layoutAnnounce){
+
+                }
+            }
         }
     }
 }

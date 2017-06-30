@@ -11,11 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_DESCRIPTION;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_IMAGE_URL;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_LOCATION;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_NAME;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_DESCRIPTION;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_IMAGE_URL;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_LOCATION;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_NAME;
 
 /**
  * Created by vignesh on 24-06-2017.
@@ -48,6 +48,10 @@ public class Parser {
                 samuhaEvent.setEventLocation(eventLocation);
                 samuhaEvent.setImageUrl(imageUrl);
                 samuhaEvent.setShortDescribtion(shortDescribtion);
+                samuhaEvent.setLatitude(eventObject.getString("latitude"));
+                samuhaEvent.setLongititude(eventObject.getString("longititude"));
+                String locUrl ="geo:"+eventObject.getString("latitude")+","+eventObject.getString("longititude");
+                samuhaEvent.setLocUrl(locUrl);
                 samuhaEventArrayList.add(samuhaEvent);
             }
         } catch (JSONException e) {
@@ -126,9 +130,13 @@ public class Parser {
                 JSONObject jo_inside = announceJsonArray.getJSONObject(j);
                 Announcement announcement = new Announcement();
                 announcement.setId(jo_inside.getString("id"));
-                announcement.setTitle(jo_inside.getString("title"));
-                announcement.setType(jo_inside.getString("type"));
-                announcement.setUpdates(jo_inside.getString("updates"));
+                announcement.setEventName(jo_inside.getString("event_name"));
+                announcement.setEventDate(jo_inside.getString("event_date"));
+                announcement.setTeamName(jo_inside.getString("team_name"));
+                announcement.setTeamScore(jo_inside.getString("team_score"));
+                announcement.setCaptainName(jo_inside.getString("captain_name"));
+                announcement.setViceCaptainName(jo_inside.getString("vice_captain_name"));
+                announcement.setResults(jo_inside.getString("results"));
                 announcements.add(announcement);
             }
             Log.d("EVENTS",announceJsonArray.toString());
@@ -181,7 +189,7 @@ public class Parser {
          //   JSONArray memArray = new JSONObject(result).getJSONObject("response").getJSONArray("outpus");
            JSONObject resJsonObject = new JSONObject(result);
             JSONObject responseObject = resJsonObject.getJSONObject("response");
-            String imgPrefix ="http://www.thanjavurkingslionsclub.com/sandbox/"+responseObject.getString("image_path");
+            String imgPrefix =responseObject.getString("image_path");
             JSONArray memArray =  responseObject.getJSONArray("outputs");
             for(int i=0;i<memArray.length();i++){
                 JSONObject memObject = memArray.getJSONObject(i);
@@ -222,7 +230,7 @@ public class Parser {
             //   JSONArray memArray = new JSONObject(result).getJSONObject("response").getJSONArray("outpus");
             JSONObject resJsonObject = new JSONObject(result);
             JSONObject responseObject = resJsonObject.getJSONObject("response");
-            String imgPrefix ="http://www.thanjavurkingslionsclub.com/sandbox/"+responseObject.getString("image_path");
+            String imgPrefix =responseObject.getString("image_path");
             JSONArray memArray =  responseObject.getJSONArray("outputs");
             for(int i=0;i<memArray.length();i++){
                 JSONObject memObject = memArray.getJSONObject(i);

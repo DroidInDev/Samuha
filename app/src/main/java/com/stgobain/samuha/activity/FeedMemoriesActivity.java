@@ -21,14 +21,14 @@ import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.MemeoriesData;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.MemoryFeedAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 import com.stgobain.samuha.paginate.LoadingListItemCreator;
 import com.stgobain.samuha.paginate.LoadingListItemSpanLookup;
 import com.stgobain.samuha.paginate.Paginate;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,19 +36,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.FEED_MEMORIES_LIKE_URL;
-import static com.stgobain.samuha.Utility.AppUtils.FEED_MEMORIES_URL;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_MESSAGE;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_FEED_MEMORIES;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_MEMORY_FEED_LIKE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.FEED_MEMORIES_LIKE_URL;
+import static com.stgobain.samuha.utility.AppUtils.FEED_MEMORIES_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_MESSAGE;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_FEED_MEMORIES;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_MEMORY_FEED_LIKE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 26-06-2017.
@@ -194,6 +194,19 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
         Intent intent = new Intent(FeedMemoriesActivity.this,VideoPrecviewActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void imageClicked(String imgUrl) {
+     /*   Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }*/
+        Intent intent = new Intent(FeedMemoriesActivity.this,ImageViewActivity.class);
+        intent.putExtra("IMGURL",imgUrl);
+        startActivity(intent);
     }
 
     private class CustomLoadingListItemCreator implements LoadingListItemCreator {

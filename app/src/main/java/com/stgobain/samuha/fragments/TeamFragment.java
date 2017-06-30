@@ -10,41 +10,42 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
+import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.CustomUserInterface.CustomGrid;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.Team;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
 import com.stgobain.samuha.activity.TeamDescriptionActivity;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_TEAMS;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_EVENT_DATE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
-import static com.stgobain.samuha.Utility.AppUtils.TEAMS_URL;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_TEAMS;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_EVENT_DATE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.TEAMS_URL;
 
 /**
  * Created by vignesh on 15-06-2017.
  */
 
-public class TeamFragment extends Fragment implements NetworkServiceResultReceiver.Receiver {
+public class TeamFragment extends Fragment implements NetworkServiceResultReceiver.Receiver, View.OnClickListener {
     private NetworkServiceResultReceiver mReceiver;
     private ProgressDialog progressDialog;
     GridView grid;
@@ -63,11 +64,26 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
     };
     ArrayList<Team> teamsList = new ArrayList<>();
     CustomGrid adapter;
-
+    CustomFontTextView techNowTxt;
+    CustomFontTextView digiNowTxt;
+    CustomFontTextView cyberNowTxt;
+    CustomFontTextView betaNowTxt;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_team, container, false);
-        grid = (GridView) layout.findViewById(R.id.grid);
+        ImageView techNowImg = (ImageView)layout.findViewById(R.id.imgtechNow);
+        ImageView digiNowImg = (ImageView)layout.findViewById(R.id.imgDigiNow);
+        ImageView cyberNowImg = (ImageView)layout.findViewById(R.id.imgCyberNow);
+        ImageView betaNowImg = (ImageView)layout.findViewById(R.id.imgBetsNow);
+        techNowImg.setOnClickListener(this);
+        digiNowImg.setOnClickListener(this);
+        cyberNowImg.setOnClickListener(this);
+        betaNowImg.setOnClickListener(this);
+        techNowTxt = (CustomFontTextView)layout.findViewById(R.id.txtTechNow);
+        digiNowTxt = (CustomFontTextView)layout.findViewById(R.id.txtDigiNow);
+        cyberNowTxt = (CustomFontTextView)layout.findViewById(R.id.txtCyberNow);
+        betaNowTxt = (CustomFontTextView)layout.findViewById(R.id.txtBetsNow);
+     /*   grid = (GridView) layout.findViewById(R.id.grid);
         // grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -80,21 +96,23 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
                     team = teamsList.get(i);
                 }
                 //  Toast.makeText(getActivity(), "You Clicked at " +teams[+ position], Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), TeamDescriptionActivity.class);
-                intent.putExtra("Tittle", teams[+position]);
-                intent.putExtra("Position", position);
-                intent.putExtra("TeamObject",team);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
 
             }
-        });
+        });*/
 
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         return layout;
     }
-
+    private void startTeamDescActivity(Team team,int position){
+        Intent intent = new Intent(getActivity(), TeamDescriptionActivity.class);
+        intent.putExtra("Tittle", teams[+position]);
+        intent.putExtra("Position", position);
+        intent.putExtra("TeamObject",team);
+        startActivity(intent);
+        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -150,8 +168,22 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
                     teamsList = Parser.getTeams(result);
                     for (int i = 0; i < teamsList.size(); i++) {
                         score[i] = teamsList.get(i).getScore();
+                        switch (i){
+                            case 0:
+                                techNowTxt.setText(score[i]);
+                                break;
+                            case 1:
+                                digiNowTxt.setText(score[i]);
+                                break;
+                            case 2:
+                                cyberNowTxt.setText(score[i]);
+                                break;
+                            case 3:
+                                betaNowTxt.setText(score[i]);
+                                break;
+                        }
                     }
-                    displayTeam();
+                 //   displayTeam();
                  /*   Team t = Parser.getTeam(result, position);
                     if (t != null)
                         displayTeam(t);*/
@@ -192,4 +224,21 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
         requestWebservice(jsonObject.toString(), SERVICE_REQUEST_TEAMS, TEAMS_URL);
     }
 
+    @Override
+    public void onClick(View view) {
+        Team team = null;
+        if(view.getId()==R.id.imgtechNow){
+            team = teamsList.get(0);
+            startTeamDescActivity(team,0);
+        }else if(view.getId()==R.id.imgDigiNow){
+            team = teamsList.get(1);
+            startTeamDescActivity(team,1);
+        }else if(view.getId()==R.id.imgCyberNow){
+            team = teamsList.get(2);
+            startTeamDescActivity(team,2);
+        }else if(view.getId()==R.id.imgBetsNow){
+            team = teamsList.get(3);
+            startTeamDescActivity(team,3);
+        }
+    }
 }

@@ -15,7 +15,7 @@ import android.widget.ListView;
 import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.Team;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 
 import org.json.JSONArray;
@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_EVENT_DATE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_EVENT_DATE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
 
 /**
  * Created by vignesh on 15-06-2017.

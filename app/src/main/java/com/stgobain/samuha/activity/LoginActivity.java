@@ -19,8 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import com.stgobain.samuha.CustomUserInterface.CustomEditTextView;
 import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.Utility.AppUtils;
-import com.stgobain.samuha.Utility.SharedPrefsUtils;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver.Receiver;
@@ -28,24 +28,24 @@ import com.stgobain.samuha.network.NetworkServiceResultReceiver.Receiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.stgobain.samuha.Utility.AppUtils.CODE_LOGIN_URL;
-import static com.stgobain.samuha.Utility.AppUtils.INTENET_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_IS_LOGED_IN;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RECIVER;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_REQUEST_ID;
-import static com.stgobain.samuha.Utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.Utility.AppUtils.LOGIN_URL;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_LOGIN;
-import static com.stgobain.samuha.Utility.AppUtils.SERVICE_REQUEST_LOGIN_CODE;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_DEP_ID;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_ID;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_NAME;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_TEAM_ID;
-import static com.stgobain.samuha.Utility.AppUtils.SKEY_USER_TYPE;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_ERROR;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_FINISHED;
-import static com.stgobain.samuha.Utility.AppUtils.STATUS_RUNNING;
+import static com.stgobain.samuha.utility.AppUtils.CODE_LOGIN_URL;
+import static com.stgobain.samuha.utility.AppUtils.INTENET_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.KEY_IS_LOGED_IN;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
+import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
+import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
+import static com.stgobain.samuha.utility.AppUtils.LOGIN_URL;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_LOGIN;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_LOGIN_CODE;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_DEP_ID;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_NAME;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_TEAM_ID;
+import static com.stgobain.samuha.utility.AppUtils.SKEY_USER_TYPE;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
+import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
 
 /**
  * Created by vignesh on 22-06-2017.
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
         if (!TextUtils.isEmpty(mobileNo) && !TextUtils.isEmpty(employeId)) {
             if (isValidMobile(mobileNo)) {
                 if (AppUtils.isNetworkAvailable(LoginActivity.this)) {
-                    requestLogin();
+                    requestLogin(mobileNo,employeId);
                 } else {
                     AppUtils.showAlertDialog(LoginActivity.this, INTENET_ERROR);
                 }
@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
         requestWebservice(loginJsonObject.toString(), SERVICE_REQUEST_LOGIN_CODE, CODE_LOGIN_URL);
     }
 
-    private void requestLogin() {
+    private void requestLogin(String mobileno,String employee) {
         if (this.progressDialog == null) {
             this.progressDialog = AppUtils.createProgressDialog(LoginActivity.this);
             this.progressDialog.show();
@@ -184,8 +184,8 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
         }
         JSONObject loginJsonObject = new JSONObject();
         try {
-            loginJsonObject.put("emp_id", "001");
-            loginJsonObject.put("mobile", "9876543210");
+            loginJsonObject.put("emp_id", mobileno);
+            loginJsonObject.put("mobile", employee);
         } catch (JSONException e) {
             e.printStackTrace();
         }

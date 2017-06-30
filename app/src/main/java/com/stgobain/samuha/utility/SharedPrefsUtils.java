@@ -1,4 +1,4 @@
-package com.stgobain.samuha.Utility;
+package com.stgobain.samuha.utility;
 
 /**
  * Created by vignesh on 23-06-2017.

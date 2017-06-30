@@ -49,4 +49,6 @@
     <string name="code_here">Enter your code here</string>
     <string name="login_using_code">Have a code? Login.</string>
     <string name="grand_events">Grand Final Events</string>
+    <string name="description_zoom_touch_close">zoomingimage</string>
+    <string name="empty">0</string>
 </resources>
