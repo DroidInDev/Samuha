@@ -184,8 +184,8 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
         }
         JSONObject loginJsonObject = new JSONObject();
         try {
-            loginJsonObject.put("emp_id", mobileno);
-            loginJsonObject.put("mobile", employee);
+            loginJsonObject.put("emp_id",employee );
+            loginJsonObject.put("mobile", mobileno);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -210,6 +210,7 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                 Log.d("LOGIN", "STATUS_RUNNING");
                 break;
             case STATUS_FINISHED:
+
                 Log.d("LOGIN", "FINISHED");
                 String result = resultData.getString(KEY_RESULT);
                 String status = "0";
@@ -236,6 +237,10 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        if (this.progressDialog != null) {
+                            progressDialog.dismiss();
+
+                        }
                         if (status.equals("false")) {
                             SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, true);
                             SharedPrefsUtils.setStringPreference(LoginActivity.this, SKEY_ID, id);
@@ -251,6 +256,11 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             finish();
                         } else {
+                            if (this.progressDialog != null) {
+                                progressDialog.dismiss();
+                                mobileNoEditTextView.setText("");
+                                employeeIdEditTextView.setText("");
+                            }
                           /*  if (this.progressDialog == null) {
                                 this.progressDialog.dismiss();
                             }*/
@@ -292,6 +302,8 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                             if (this.progressDialog != null) {
                                 this.progressDialog.dismiss();
                             }
+                            mobileNoEditTextView.setText("");
+                            employeeIdEditTextView.setText("");
                             SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, false);
                             AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");
                         }
