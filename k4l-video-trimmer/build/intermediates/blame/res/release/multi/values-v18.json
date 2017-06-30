@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "F:\\CWork\\Samuha\\Samuha\\k4l-video-trimmer\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v18\\values-v18.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 48,
+                    "endOffset": 99
+                },
+                "from": {
+                    "file": "C:\\Users\\vignesh\\.android\\build-cache\\30dda2003deb704391f92a17c9aac64de83c70e5\\output\\res\\values-v18\\values-v18.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 48,
+                        "endOffset": 99
+                    }
+                }
+            }
+        ]
+    }
+]
