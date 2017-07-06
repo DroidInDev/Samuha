@@ -56,7 +56,7 @@ public class ScoreActivity extends AppCompatActivity implements NetworkServiceRe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Bundle extras = getIntent().getExtras();
-        String teamTittle = "Score";
+        String teamTittle = "Scoreboard";
         getSupportActionBar().setTitle(teamTittle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

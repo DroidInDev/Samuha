@@ -108,7 +108,7 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             Bundle extras = getIntent().getExtras();
-            String teamTittle = "Uploads";
+            String teamTittle = "Auditions";
             getSupportActionBar().setTitle(teamTittle);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -169,11 +169,11 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
 
-                    case R.id.radioFather:
-                        relationShip ="Father";
+                    case R.id.radioEmployee:
+                        relationShip ="Employee";
                         break;
-                    case R.id.radioMother:
-                        relationShip ="Mother";
+                    case R.id.radioSpouse:
+                        relationShip ="Spouse";
                         break;
                     case R.id.radioSon:
                         relationShip ="Son";

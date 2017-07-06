@@ -20,17 +20,17 @@
     <string name="eneter_valid_mobile_no">Enter valid mobile Number.</string>
     <string name="invite_family">Invite family</string>
     <string name="enter_atleast_one_number">Atleast one mobile number is Required.</string>
-    <string name="score">Score</string>
-    <string name="today_event">Today\'s Event</string>
-    <string name="announcement">Announcement</string>
+    <string name="score">Scoreboard</string>
+    <string name="today_event">Today\'s Events</string>
+    <string name="announcement">Announcements</string>
     <string name="events">Events</string>
     <string name="cotest">Contest</string>
     <string name="trimming_progress">Trimming your video...</string>
     <string name="video_saved_at">Video saves at : $%1s</string>
     <string name="gallery">Gallery</string>
     <string name="upload">Upload</string>
-    <string name="video">Pick Video</string>
-    <string name="image">Pick Image</string>
+    <string name="video">Select Video</string>
+    <string name="image">Select Image</string>
     <string name="tag">#Tag</string>
     <string name="updates">Updates</string>
     <string name="contests">Contests</string>
@@ -39,9 +39,9 @@
     <string name="music">Music</string>
     <string name="dance">Dance</string>
     <string name="other">Other</string>
-    <string name="select_family">Select Family</string>
-    <string name="father">Father</string>
-    <string name="mother">Mother</string>
+    <string name="performed_by">Performed By</string>
+    <string name="employee">Employee</string>
+    <string name="spouse">Spouse</string>
     <string name="son">Son</string>
     <string name="daughter">Daughter</string>
     <string name="auditions">Auditions</string>
@@ -51,4 +51,5 @@
     <string name="grand_events">Grand Final Events</string>
     <string name="description_zoom_touch_close">zoomingimage</string>
     <string name="empty">0</string>
+    <string name="logout">Logout</string>
 </resources>

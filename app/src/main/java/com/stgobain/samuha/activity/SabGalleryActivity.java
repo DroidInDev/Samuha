@@ -21,16 +21,15 @@ import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.SabData;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.utility.AppUtils;
-import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.SabFeedAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
 import com.stgobain.samuha.paginate.LoadingListItemCreator;
 import com.stgobain.samuha.paginate.LoadingListItemSpanLookup;
 import com.stgobain.samuha.paginate.Paginate;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -77,6 +76,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
     protected int itemsPerPage = 5;
     private LinearLayoutManager layoutManager;
     private int previousTotal = 0;
+    private boolean hasLoadedAll = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,8 +112,8 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
                     }
                 }
                 if (dy < 0) {
-                    loading=true;
-                    isDataAvailable =false;
+                    loading = true;
+                    isDataAvailable = false;
                     // Recycle view scrolling up...
 
                 } else if (dy > 0) {
@@ -124,8 +124,8 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
                         // Loading NOT in progress and end of list has been reached
                         // also triggered if not enough items to fill the screen
                         // if you start loading
-                        loading=false;
-                        isDataAvailable =true;
+                        loading = false;
+                        isDataAvailable = true;
                     } else if (firstVisibleItemIndex == 0) {
                         // top of list reached
                         // if you start loading
@@ -188,6 +188,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
             tvLoading = (TextView) itemView.findViewById(R.id.tv_loading_text);
         }
     }
+
     @Override
     public void likeClicked(String memoriesId) {
         postUserLike(memoriesId);
@@ -207,15 +208,15 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
 
     @Override
     public void videoSelected(String videoUrl) {
-        Intent intent = new Intent(SabGalleryActivity.this,VideoPrecviewActivity.class);
+        Intent intent = new Intent(SabGalleryActivity.this, VideoPrecviewActivity.class);
         startActivity(intent);
 
     }
 
     @Override
     public void imageClicked(String imgUrl) {
-        Intent intent = new Intent(SabGalleryActivity.this,ImageViewActivity.class);
-        intent.putExtra("IMGURL",imgUrl);
+        Intent intent = new Intent(SabGalleryActivity.this, ImageViewActivity.class);
+        intent.putExtra("IMGURL", imgUrl);
         startActivity(intent);
     }
 
@@ -232,8 +233,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        JSONArray response = null;
-        JSONObject memoryFeedObj;
+
         switch (resultCode) {
             case STATUS_RUNNING:
                 Log.d("LOGIN", "STATUS_RUNNING");
@@ -242,29 +242,48 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
                 Log.d("LOGIN", "FINISHED");
                 String result = resultData.getString(KEY_RESULT);
                 int requestId = Integer.valueOf(resultData.getString(KEY_REQUEST_ID));
+                String resultString;
+                JSONObject response;
+                String totalRecords;
+                int recordsCount = 0;
                 String status = "0";
+                int totalCount = 0;
                 try {
                     status = new JSONObject(result).getString(KEY_ERROR);
-
+                    resultString = new JSONObject(result).getString("response");
+                    response = new JSONObject(resultString);
+                    totalRecords = response.getString("total_records");
+                    totalCount = Integer.valueOf(totalRecords);
+                    recordsCount = Integer.valueOf(totalRecords) - 5;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 switch (requestId) {
                     case SERVICE_REQUEST_FEED_SAB:
 
-                    if (status.equals("false")) {
-                        //  memoryFeedArraylist = loadmemoryFeedsFromAsset();
-                        sabFeedArraylist = Parser.getsabFeedArraylist(result);
-                        memoryAdaptor.setSabFeeds(sabFeedArraylist);
-                        page++;
-                        loading = false;
+                        if (status.equals("false")) {
+                            //  memoryFeedArraylist = loadmemoryFeedsFromAsset();
+                            sabFeedArraylist = Parser.getsabFeedArraylist(result);
+                            memoryAdaptor.setSabFeeds(sabFeedArraylist);
+                            page++;
+                            loading = false;
+                            if (totalCount == 0) {
+                                hasLoadedAll = true;
+                                paginate.setHasMoreDataToLoad(false);
+                            } else if (itemsAddPagination >= recordsCount) {
+                                hasLoadedAll = true;
+                                paginate.setHasMoreDataToLoad(false);
+                            } else {
+                                hasLoadedAll = false;
+                            }
+                        } else {
 
-                    } else {
-                        addLoadingRow = false;
-                        loading = true;
-                        AppUtils.showAlertDialog(SabGalleryActivity.this, "Network Error!. Try Again!");
-                    }
-                    break;
+                            hasLoadedAll = true;
+                            paginate.setHasMoreDataToLoad(false);
+                            loading = true;
+                            AppUtils.showAlertDialog(SabGalleryActivity.this, "No Data Found!");
+                        }
+                        break;
                     case SERVICE_REQUEST_SAB_FEED_LIKE:
                         if (status.equals("false")) {
                             if (this.progressDialog != null) {
@@ -316,7 +335,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
 
     @Override
     public boolean hasLoadedAllItems() {
-        return page == totalPages;
+        return hasLoadedAll;
     }
 
     @Override

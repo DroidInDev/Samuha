@@ -32,10 +32,11 @@
             android:id="@+id/preview"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/placeholder"
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +90,6 @@
                 android:textSize="18sp"
                 android:layout_marginTop="3dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
                 android:textAlignment="center"
                 android:layout_marginEnd="15dp"
                 android:layout_weight="0.5"
@@ -105,7 +105,7 @@
                 android:textAlignment="center"
                 android:layout_weight="0.5"
                 android:layout_marginTop="3dp"
-                android:text="@string/select_family"
+                android:text="@string/performed_by"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 app:font="@string/font_name_square" />
@@ -174,21 +174,21 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/radioFather"
+                android:id="@+id/radioEmployee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/father"
                 android:layout_gravity="start"
-                android:checked="true" />
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:text="@string/employee" />
 
             <RadioButton
-                android:id="@+id/radioMother"
+                android:id="@+id/radioSpouse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="start"
-                android:text="@string/mother" />
+                android:layout_margin="10dp"
+                android:text="@string/spouse" />
             <RadioButton
                 android:id="@+id/radioSon"
                 android:layout_width="wrap_content"

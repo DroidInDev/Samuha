@@ -28,10 +28,11 @@
             android:id="@+id/preview"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/placeholder"
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +72,22 @@
                 android:background="@drawable/rounded_corner"/>
 
         </LinearLayout>
-        <RadioGroup
+        <com.stgobain.samuha.CustomUserInterface.CustomFontButton
+            android:id="@+id/chooseEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Contests or Events"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:padding="15dp"
+            android:textSize="12sp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            app:font="@string/font_name_square"
+            android:textAllCaps="false"
+            android:onClick="onSelectEvents"
+            android:background="@drawable/rounded_corner"/>
+      <!--  <RadioGroup
             android:id="@+id/radioOptionsTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +109,7 @@
                 android:layout_margin="10dp"
                 android:text="@string/cotest" />
 
-        </RadioGroup>
+        </RadioGroup>-->
         <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
             android:id="@+id/filename1"
             android:layout_width="wrap_content"

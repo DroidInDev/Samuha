@@ -24,11 +24,11 @@ android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgAnnounceAttr"
-            android:layout_width="35dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:src="@drawable/event_box" />
 
         <LinearLayout
@@ -63,11 +63,11 @@ android:layout_height="wrap_content">
                 android:textSize="12sp"
                 android:textStyle="normal"
                 app:font="@string/font_name_square" />
-            <View
+          <!--  <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/bg_grey" />
+                android:background="@color/bg_grey" />-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -11,12 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 
 import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.Model.SamuhaEvent;
 import com.stgobain.samuha.R;
+import com.stgobain.samuha.activity.TodayEventActivity;
 import com.stgobain.samuha.adapter.EventAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
@@ -31,11 +32,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.stgobain.samuha.utility.AppUtils.EVENTS_URL;
+import static com.stgobain.samuha.utility.AppUtils.GRAND_FINAL_EVENTS_URL;
 import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
 import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_EVENTS;
+import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GRAND_FINAL_EVENTS;
 import static com.stgobain.samuha.utility.AppUtils.SKEY_ID;
 import static com.stgobain.samuha.utility.AppUtils.STATUS_ERROR;
 import static com.stgobain.samuha.utility.AppUtils.STATUS_FINISHED;
@@ -45,15 +48,17 @@ import static com.stgobain.samuha.utility.AppUtils.STATUS_RUNNING;
  * Created by vignesh on 15-06-2017.
  */
 
-public class EventFragmet extends Fragment implements NetworkServiceResultReceiver.Receiver,Paginate.Callbacks {
+public class EventFragmet extends Fragment implements NetworkServiceResultReceiver.Receiver, Paginate.Callbacks {
     private NetworkServiceResultReceiver mReceiver;
     private ProgressDialog progressDialog;
     private RecyclerView eventRecyclerView;
     private EventAdapter eventAdaptor;
     ArrayList<SamuhaEvent> eventArraylist = new ArrayList<>();
-    RelativeLayout eventLayout;
+    ArrayList<SamuhaEvent> grandEventArraylist = new ArrayList<>();
+   // LinearLayout eventLayout;
     CustomFontTextView internalEvtTxt;
     CustomFontTextView comingSoonTxt;
+    ImageView openGrandEvents;
     //Pagination
     private int page = 0;
     private Paginate paginate;
@@ -73,11 +78,23 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         eventAdaptor = new EventAdapter(getActivity());
         eventRecyclerView.setAdapter(eventAdaptor);
-        eventLayout = (RelativeLayout) layout.findViewById(R.id.layoutEventFragment);
+      //  eventLayout = (LinearLayout) layout.findViewById(R.id.layoutEventFragment);
         internalEvtTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvnt);
         comingSoonTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvntCn);
+        openGrandEvents = (ImageView)layout.findViewById(R.id.imgGrandArrow);
         internalEvtTxt.setVisibility(View.INVISIBLE);
         comingSoonTxt.setVisibility(View.INVISIBLE);
+        openGrandEvents.setVisibility(View.INVISIBLE);
+        openGrandEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TodayEventActivity.class);
+                intent.putExtra("Tittle","Grand Final Events");
+                intent.putExtra("From","Event");
+                intent.putExtra("EventList",grandEventArraylist);
+                getActivity().startActivity(intent);
+            }
+        });
         return layout;
     }
 
@@ -103,7 +120,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-       // setUpPagination();
+        // setUpPagination();
         if (isVisibleToUser) {
             if (this.progressDialog == null) {
                 this.progressDialog = AppUtils.createProgressDialog(getActivity());
@@ -166,34 +183,54 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
             case STATUS_FINISHED:
                 Log.d("LOGIN", "FINISHED");
                 String result = resultData.getString(KEY_RESULT);
+                int requestId = Integer.valueOf(resultData.getString(KEY_REQUEST_ID));
                 String status = "0";
                 try {
                     status = new JSONObject(result).getString(KEY_ERROR);
                     isGrandFinalEventActive = new JSONObject(result).getString("grand_final_status");
-                    Log.d("EVENTS",isGrandFinalEventActive);
-                    eventArraylist = Parser.getEventArrayList(result);
-
+                    Log.d("EVENTS", isGrandFinalEventActive);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (status.equals("false")) {
-                    if (this.progressDialog != null) {
-                        this.progressDialog.dismiss();
-                     //  eventArraylist = loadEventsFromAsset();
-                        eventAdaptor.setEvents(eventArraylist);
-                        internalEvtTxt.setVisibility(View.VISIBLE);
-                        comingSoonTxt.setVisibility(View.VISIBLE);
-                        if(isGrandFinalEventActive.equals(true)){
-                            requestGrandFinalEvents();
+                switch (requestId) {
+                    case SERVICE_REQUEST_EVENTS:
+                        if (status.equals("false")) {
+                            if (this.progressDialog != null) {
+                                this.progressDialog.dismiss();
+                                //  eventArraylist = loadEventsFromAsset();
+                                eventAdaptor.setEvents(eventArraylist);
+                                internalEvtTxt.setVisibility(View.VISIBLE);
+                                comingSoonTxt.setVisibility(View.VISIBLE);
+                                eventArraylist = Parser.getEventArrayList(result);
+                                if (isGrandFinalEventActive.equals("true")) {
+                                  //  openGrandEvents.setVisibility(View.VISIBLE);
+                                    comingSoonTxt.setVisibility(View.INVISIBLE);
+                                    requestGrandFinalEvents();
+                                }
+                            }
+                        } else {
+                            if (this.progressDialog != null) {
+                                progressDialog.dismiss();
+                            }
+                            AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
                         }
-                    }
-                } else {
-                    if (this.progressDialog != null) {
-                        progressDialog.dismiss();
-                    }
-                    AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
+                        break;
+                    case SERVICE_REQUEST_GRAND_FINAL_EVENTS:
+                        if (status.equals("false")) {
+                            if (this.progressDialog != null) {
+                                this.progressDialog.dismiss();
+                                //  eventArraylist = loadEventsFromAsset();
+                                openGrandEvents.setVisibility(View.VISIBLE);
+                                grandEventArraylist =Parser.getEventArrayList(result);
+                            }
+                        } else {
+                            if (this.progressDialog != null) {
+                                progressDialog.dismiss();
+                            }
+                            AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
+                        }
+                        break;
                 }
-                Log.d("LOGIN", "FINISHED status " + status + " ");
                 break;
             case STATUS_ERROR:
                 if (this.progressDialog != null) {
@@ -207,7 +244,15 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
     }
 
     private void requestGrandFinalEvents() {
-
+        String userId = SharedPrefsUtils.getStringPreference(getActivity(), SKEY_ID);
+        JSONObject jsonObject = new JSONObject();
+       /* try {
+            jsonObject.put(SKEY_ID, userId);
+            jsonObject.put(SKEY_EVENT_DATE, "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_GRAND_FINAL_EVENTS, GRAND_FINAL_EVENTS_URL);
     }
 
    /* public ArrayList<SamuhaEvent> loadEventsFromAsset() {

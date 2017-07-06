@@ -17,11 +17,11 @@ import com.stgobain.samuha.CustomUserInterface.CustomFontTextView;
 import com.stgobain.samuha.Model.ContextData;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.utility.AppUtils;
-import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.adapter.PopulateListAdapter;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.stgobain.samuha.utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
-import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
+import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_AND_CONTEXTS_URL;
 import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
 import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
@@ -87,6 +87,7 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
                 ContextData c = finalContestList.get(position);
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(RESULT_CONTEXTODE, c.getName());
+                returnIntent.putExtra("Type",c.getType());
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -139,7 +140,8 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD, GET_EVENTS_TO_UPLOAD_URL);
+    //    requestWebservice(jsonObject.toString(), SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD, GET_EVENTS_TO_UPLOAD_URL);
+        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD, GET_EVENTS_AND_CONTEXTS_URL);
     }
     private void requestWebservice(String request, int reqID, String url) {
         this.mReceiver = new NetworkServiceResultReceiver(new Handler());

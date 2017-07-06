@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutEventFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/bg_grey"
+    android:orientation="vertical">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylerviewEvent"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-        android:id="@+id/txtInternalEvnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        android:text="@string/grand_events"
-        android:layout_marginTop="15dp"
-        app:font="@string/font_name_square"
-        android:textStyle="normal"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/recylerviewEvent" />
-    <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
-        android:id="@+id/txtInternalEvntCn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_tab_unselected"
-        android:textSize="18sp"
-        android:text="Coming Soon"
-        android:layout_below="@id/txtInternalEvnt"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="3dp"
-        android:textStyle="bold"
-        app:font="@string/font_name_square" />
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.8" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txtInternalEvnt"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/grand_events"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:font="@string/font_name_square" />
+
+            <ImageView
+                android:id="@+id/imgGrandArrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/txtInternalEvnt"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/right_arrow_icon" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txtInternalEvntCn"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_below="@id/txtInternalEvnt"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:text="Coming Soon"
+                android:textColor="@color/text_tab_unselected"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:font="@string/font_name_square" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

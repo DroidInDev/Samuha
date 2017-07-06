@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    employeeIdEditTextView.setInputType(InputType.TYPE_CLASS_TEXT);
+                    employeeIdEditTextView.setInputType(InputType.TYPE_CLASS_PHONE);
                 }
             }
         });
@@ -254,6 +254,8 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                                 this.progressDialog.dismiss();
                             }
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            mobileNoEditTextView.setText("");
+                            employeeIdEditTextView.setText("");
                             finish();
                         } else {
                             if (this.progressDialog != null) {
@@ -297,6 +299,8 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                                 this.progressDialog.dismiss();
                             }
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            mobileNoEditTextView.setText("");
+                            employeeIdEditTextView.setText("");
                             finish();
                         } else {
                             if (this.progressDialog != null) {

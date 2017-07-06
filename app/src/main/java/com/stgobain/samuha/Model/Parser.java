@@ -173,6 +173,7 @@ public class Parser {
                 JSONObject jo_inside = contestJsonArray.getJSONObject(j);
                 ContextData contextData = new ContextData();
                 contextData.setName(jo_inside.getString("name"));
+                contextData.setType(jo_inside.getString("event_type"));
                 contestsList.add(contextData);
             }
             Log.d("CONTESTS",contestJsonArray.toString());

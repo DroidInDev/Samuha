@@ -141,6 +141,43 @@
                 android:gravity="right"
                 android:src="@drawable/right_arrow_icon" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/logoutLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imglogout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.2"
+                android:src="@drawable/logout_icon" />
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txtlogout"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="30dp"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:text="@string/logout"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:font="@string/font_name_square" />
+
+            <ImageView
+                android:id="@+id/imgRightArrowlogout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:gravity="right"
+                android:src="@drawable/right_arrow_icon" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!--  <com.stgobain.samuha.CustomUserInterface.CustomFontTextView

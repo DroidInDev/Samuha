@@ -26,7 +26,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.2"
+                android:layout_weight="0.1"
                 android:src="@drawable/event_box" />
 
             <LinearLayout
@@ -75,17 +75,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
+                    android:gravity="end"
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/imgusericon"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_weight="0.2"
                         android:src="@drawable/location_icon" />
                     <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
                         android:id="@+id/txttodayEventLocation"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.8"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"

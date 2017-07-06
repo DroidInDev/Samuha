@@ -51,15 +51,24 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
     private ArrayList<SamuhaEvent> todayEventList = new ArrayList<>();
     private TodayEventAdapter todayEventAdapter;
     private RecyclerView recyclerView;
-
+    String fromEventType ="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String activityTittle = "Today's Events";
+
         Bundle extras = getIntent().getExtras();
-        String activityTittle = "Today's Event";
+        if(extras!=null){
+            activityTittle = extras.getString("Tittle");
+            fromEventType = extras.getString("From");
+        }
+        if(fromEventType.equals("Event"))
+        {
+            todayEventList = extras.getParcelableArrayList("EventList");
+        }
         getSupportActionBar().setTitle(activityTittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.recylerviewTodayEVent);
@@ -72,7 +81,12 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
     @Override
     protected void onResume() {
         super.onResume();
-        requestScore();
+        if(fromEventType.equals("Event")) {
+            todayEventAdapter.setTodayEvents(todayEventList);
+            recyclerView.setVisibility(View.VISIBLE);
+        }else {
+            requestScore();
+        }
     }
 
     private void requestScore() {

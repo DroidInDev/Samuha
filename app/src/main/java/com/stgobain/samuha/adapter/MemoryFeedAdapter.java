@@ -64,7 +64,7 @@ public class MemoryFeedAdapter  extends RecyclerView.Adapter<MemoryFeedAdapter.V
         setUserPost(imgUrl,holder);
     }
     private void setUserPost(String userPost, final ViewHolderMemory holder) {
-        if (!userPost.equals("NA")) {
+        if (!userPost.equals("NA")&& !userPost.equals(null)) {
             this.imageLoader.get(userPost, new ImageLoader.ImageListener() {
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                     Bitmap bitmap = response.getBitmap();

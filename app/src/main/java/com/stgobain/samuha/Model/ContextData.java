@@ -11,6 +11,16 @@ import android.os.Parcelable;
 public class ContextData implements Parcelable {
 
     private String name;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
     private String code;
     private Drawable flag;
 

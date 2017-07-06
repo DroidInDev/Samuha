@@ -63,6 +63,7 @@ public class SabFeedAdapter  extends RecyclerView.Adapter<SabFeedAdapter.ViewHol
         String imgUrl = currentMemory.getFileName();
         setUserPost(imgUrl,holder);
     }
+    //events -
     private void setUserPost(String userPost, final ViewHolderSab holder) {
         if (!userPost.equals("NA")) {
             this.imageLoader.get(userPost, new ImageLoader.ImageListener() {

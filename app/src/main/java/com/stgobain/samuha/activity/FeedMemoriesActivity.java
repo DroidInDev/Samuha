@@ -30,11 +30,12 @@ import com.stgobain.samuha.paginate.Paginate;
 import com.stgobain.samuha.utility.AppUtils;
 import com.stgobain.samuha.utility.SharedPrefsUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
 import static com.stgobain.samuha.utility.AppUtils.FEED_MEMORIES_LIKE_URL;
 import static com.stgobain.samuha.utility.AppUtils.FEED_MEMORIES_URL;
@@ -78,6 +79,8 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
     protected int itemsPerPage = 2;
     private LinearLayoutManager layoutManager;
     private int previousTotal = 0;
+    static CircularProgressBar circularProgressBar;
+    private boolean hasLoadedAll = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -191,7 +194,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
 
     @Override
     public void videoSelected(String videoUrl) {
-        Intent intent = new Intent(FeedMemoriesActivity.this,VideoPrecviewActivity.class);
+        Intent intent = new Intent(FeedMemoriesActivity.this, VideoPrecviewActivity.class);
         startActivity(intent);
 
     }
@@ -204,8 +207,8 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
         }*/
-        Intent intent = new Intent(FeedMemoriesActivity.this,ImageViewActivity.class);
-        intent.putExtra("IMGURL",imgUrl);
+        Intent intent = new Intent(FeedMemoriesActivity.this, ImageViewActivity.class);
+        intent.putExtra("IMGURL", imgUrl);
         startActivity(intent);
     }
 
@@ -228,6 +231,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
         public VH(View itemView) {
             super(itemView);
             tvLoading = (TextView) itemView.findViewById(R.id.tv_loading_text);
+           /* circularProgressBar = (CircularProgressBar)itemView.findViewById(R.id.recyleProgress);*/
         }
     }
 
@@ -244,7 +248,6 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
 
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        JSONArray response = null;
         JSONObject memoryFeedObj;
         switch (resultCode) {
             case STATUS_RUNNING:
@@ -254,9 +257,19 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
                 Log.d("LOGIN", "FINISHED");
                 String result = resultData.getString(KEY_RESULT);
                 int requestId = Integer.valueOf(resultData.getString(KEY_REQUEST_ID));
+                String resultString;
+                JSONObject response;
+                String totalRecords;
+                int recordsCount = 0;
+                int totalCount = 0;
                 String status = "0";
                 try {
                     status = new JSONObject(result).getString(KEY_ERROR);
+                    resultString = new JSONObject(result).getString("response");
+                    response = new JSONObject(resultString);
+                    totalRecords = response.getString("total_records");
+                    totalCount = Integer.valueOf(totalRecords);
+                    recordsCount = Integer.valueOf(totalRecords) - 5;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -265,12 +278,22 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
                     case SERVICE_REQUEST_FEED_MEMORIES:
                         if (status.equals("false")) {
                             memoryFeedArraylist = Parser.getmemoryFeedArrayList(result);
-                                memoryAdaptor.setMemoryFeeds(memoryFeedArraylist);
-                                //  memoryFeedArraylist = loadmemoryFeedsFromAsset();
-                                page++;
-                                loading = false;
+                            memoryAdaptor.setMemoryFeeds(memoryFeedArraylist);
+                            //  memoryFeedArraylist = loadmemoryFeedsFromAsset();
+                            page++;
+                            loading = false;
+                            if (totalCount == 0) {
+                                hasLoadedAll = true;
+                                paginate.setHasMoreDataToLoad(false);
+                            } else if (itemsAddPagination >= recordsCount) {
+                                hasLoadedAll = true;
+                                paginate.setHasMoreDataToLoad(false);
+                            } else {
+                                hasLoadedAll = false;
                             }
-                            else {
+                        } else {
+
+                            hasLoadedAll = true;
                             String message = "";
                             try {
                                 message = new JSONObject(result).getString(KEY_MESSAGE);
@@ -279,7 +302,9 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
                             }
                             loading = true;
                             addLoadingRow = false;
-                            AppUtils.showAlertDialog(FeedMemoriesActivity.this, message);
+                            hasLoadedAll = true;
+                            paginate.setHasMoreDataToLoad(false);
+                            AppUtils.showAlertDialog(FeedMemoriesActivity.this, "No Data Found!");
                         }
                         break;
                     case SERVICE_REQUEST_MEMORY_FEED_LIKE:
@@ -296,7 +321,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
 
                             }
 
-                           // AppUtils.showAlertDialog(FeedMemoriesActivity.this, "Network Error!. Try Again!");
+                            // AppUtils.showAlertDialog(FeedMemoriesActivity.this, "Network Error!. Try Again!");
                         }
                         break;
                 }
@@ -319,6 +344,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
             this.loading = true;
             requestmemoryFeeds(itemsAddPagination);
             this.itemsAddPagination += itemsPerPage;
+
         }
 
     }
@@ -330,7 +356,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
 
     @Override
     public boolean hasLoadedAllItems() {
-        return page == totalPages;
+        return hasLoadedAll;
     }
 
     @Override

@@ -34,10 +34,10 @@ import android.widget.Toast;
 import com.stgobain.samuha.Model.ContextData;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.utility.AppUtils;
-import com.stgobain.samuha.utility.SharedPrefsUtils;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +50,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import life.knowledge4.videotrimmer.utils.FileUtils;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import static com.stgobain.samuha.utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
 import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
@@ -96,6 +99,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
     String videoPath;
     RadioGroup rg;
     boolean isFileSIzeToolarge;
+    String eventType = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +113,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading...");
-        isFileSIzeToolarge=false;
+        isFileSIzeToolarge = false;
         btnUpload = (Button) findViewById(R.id.upload);
         btnPickImage = (Button) findViewById(R.id.pick_img);
         btnPickVideo = (Button) findViewById(R.id.pick_vdo);
@@ -138,7 +142,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                 }
             }
         });
-        rg = (RadioGroup) findViewById(R.id.radioOptionsTag);
+      /*  rg = (RadioGroup) findViewById(R.id.radioOptionsTag);
         rg.clearCheck();
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -147,8 +151,8 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                     case R.id.radioEvent:
                         rg.clearCheck();
                         Intent intent = new Intent(MediaUploadActivity.this, PopulateListContestViewActivity.class);
-                        intent.putExtra("tittle","Choose Events ");
-                        intent.putExtra("type","EVENT");
+                        intent.putExtra("tittle", "Choose Events ");
+                        intent.putExtra("type", "EVENT");
                         startActivityForResult(intent, EVENT_REQ_CODE);
 //                        alertScrollView(eventsList);
                         // do operations specific to this selection
@@ -157,14 +161,14 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                         rg.clearCheck();
                         //intent.putParcelableArrayListExtra("contestlist",contextList);
                         Intent cIntent = new Intent(MediaUploadActivity.this, PopulateListContestViewActivity.class);
-                        cIntent.putExtra("tittle","Choose Contests ");
-                        cIntent.putExtra("type","CONTEST");
+                        cIntent.putExtra("tittle", "Choose Contests ");
+                        cIntent.putExtra("type", "CONTEST");
                         startActivityForResult(cIntent, CTXT_REQ_CODE);
                         // do operations specific to this selection
                         break;
                 }
             }
-        });
+        });*/
 
         // Video must be low in Memory or need to be compressed before uploading...
         btnPickVideo.setOnClickListener(new View.OnClickListener() {
@@ -251,6 +255,13 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
         }
     }
 
+    public void onSelectEvents(View v) {
+        Intent intent = new Intent(MediaUploadActivity.this, PopulateListContestViewActivity.class);
+        intent.putExtra("tittle", "Choose Events or Contests ");
+        intent.putExtra("type", "EVENT");
+        startActivityForResult(intent, EVENT_REQ_CODE);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -284,11 +295,11 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     compressedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byteArray = byteArrayOutputStream.toByteArray();
-                    long compressedSize =(byteArray.length/1024)/1024;
-                    if(compressedSize<=1){
-                        isFileSIzeToolarge=false;
-                    }else{
-                        isFileSIzeToolarge =true;
+                    long compressedSize = (byteArray.length / 1024) / 1024;
+                    if (compressedSize <= 1) {
+                        isFileSIzeToolarge = false;
+                    } else {
+                        isFileSIzeToolarge = true;
                     }
                     encImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 } catch (Exception e) {
@@ -333,12 +344,12 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                 cursor.close();*/
 
             } else if (requestCode == CTXT_REQ_CODE && resultCode == Activity.RESULT_OK) {
-                eventContestTag = "#"+data.getStringExtra(RESULT_CONTEXTODE);
+                eventContestTag = "#" + data.getStringExtra(RESULT_CONTEXTODE);
                 str1.setText(eventContestTag);
                 //  Toast.makeText(this, "You selected countrycode: " + eventContestTag, Toast.LENGTH_LONG).show();
-            }
-            else if (requestCode == EVENT_REQ_CODE && resultCode == Activity.RESULT_OK) {
-                eventContestTag = "#"+data.getStringExtra(RESULT_CONTEXTODE);
+            } else if (requestCode == EVENT_REQ_CODE && resultCode == Activity.RESULT_OK) {
+                eventContestTag = "#" + data.getStringExtra(RESULT_CONTEXTODE);
+                eventType = data.getStringExtra("Type");
                 str1.setText(eventContestTag);
                 //  Toast.makeText(this, "You selected countrycode: " + eventContestTag, Toast.LENGTH_LONG).show();
             } else if (requestCode == VIDEO_TRIM_CODE && resultCode == Activity.RESULT_OK) {
@@ -471,12 +482,12 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
         if (!TextUtils.isEmpty(encImage) && !TextUtils.isEmpty(eventContestTag)) {
             if (progressDialog != null)
                 progressDialog.show();
-            if(!isFileSIzeToolarge) {
+            if (!isFileSIzeToolarge) {
                 String userId = SharedPrefsUtils.getStringPreference(MediaUploadActivity.this, SKEY_ID);
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("user_id", userId);
-                    jsonObject.put("event_type", "event");
+                    jsonObject.put("event_type", eventType);
                     jsonObject.put("event_contest_id", eventContestTag);
                     jsonObject.put("file_type", "image");
                     jsonObject.put("files", encImage);
@@ -484,9 +495,8 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                     e.printStackTrace();
                 }
                 requestWebservice(jsonObject.toString(), SERVICE_REQUEST_POST_MEMORIES, POST_MEMORIES);
-            }
-            else {
-                AppUtils.showAlertDialog(MediaUploadActivity.this,"File size too large too upload");
+            } else {
+                AppUtils.showAlertDialog(MediaUploadActivity.this, "File size too large too upload");
             }
         } else if (TextUtils.isEmpty(encImage)) {
             AppUtils.showAlertDialog(MediaUploadActivity.this, "Choose Image or Video to upload!");
@@ -601,66 +611,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
         return super.onOptionsItemSelected(item);
     }
 
-  /*  public void alertDialogView(ArrayList<String> arrayList) {
-        View dialogView = View.inflate(MediaUploadActivity.this,R.layout.contest_dialog, null);
-        ListView lv= (ListView) dialogView.findViewById(R.id.listview);
-        final String[] contestArray = new String[arrayList.size()];
-        arrayList.toArray(contestArray);
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contestArray);
-        lv.setAdapter(listAdapter);
+  private void uploadFileUsingRetrofit(){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MediaUploadActivity.this)
-                .setTitle("Choose contest")
-                .setView(dialogView)
-                .setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String selectedText = contestArray[i].toString();
-                        str1.setText(selectedText);
-                    }
-                })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                     //   str1.setText(contestArray[which]);
-                        // TODO do something
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TODO do something
-                    }
-                });
-        builder.create().show();
-
-    }
-    private void showdialog()
-    {
-        final String[] contestArray = new String[contextList.size()];
-        contextList.toArray(contestArray);
-        Dialog listDialog = new Dialog(this);
-        listDialog.setTitle("Select Item");
-        LayoutInflater li = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = li.inflate(R.layout.contest_dialog, null, false);
-        listDialog.setContentView(v);
-        listDialog.setCancelable(true);
-        //there are a lot of settings, for dialog, check them all out!
-
-        ListView list1 = (ListView) listDialog.findViewById(R.id.listview);
-        list1.setOnItemClickListener(this);
-        list1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, contestArray));
-        //now that the dialog is set up, it's time to show it
-        listDialog.show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        final String[] contestArray = new String[contextList.size()];
-        contextList.toArray(contestArray);
-        String selectedText = contestArray[i].toString();
-        str1.setText(selectedText);
-    }*/
+  }
 }

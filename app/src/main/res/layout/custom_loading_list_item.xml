@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <fr.castorflex.android.circularprogressbar.CircularProgressBar
+   <!-- <fr.castorflex.android.circularprogressbar.CircularProgressBar
+        android:id="@+id/recyleProgress"
         app:cpb_color="#000"
         app:cpb_colors="@array/color_array"
         app:cpb_max_sweep_angle="300"
@@ -17,7 +18,7 @@
         android:indeterminate="true"
         android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
         android:layout_height="50dp"
-        android:layout_width="50dp" />
+        android:layout_width="50dp" />-->
 
     <TextView
         android:id="@+id/tv_loading_text"
