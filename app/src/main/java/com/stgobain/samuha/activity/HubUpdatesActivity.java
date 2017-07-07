@@ -134,11 +134,14 @@ public class HubUpdatesActivity extends AppCompatActivity implements NetworkServ
                     }
                    /* SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, false);
                     AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");*/
-                    AppUtils.showAlertDialog(HubUpdatesActivity.this, "Network Error. Try Again!");
+                    AppUtils.showAlertDialog(HubUpdatesActivity.this, "No Data Found!");
                 }
                 Log.d("LOGIN", "FINISHED status " + status + " ");
                 break;
             case STATUS_ERROR:
+                if (this.progressDialog != null) {
+                    this.progressDialog.dismiss();
+                }
                 AppUtils.showAlertDialog(HubUpdatesActivity.this, "Network Error. Try Again!");
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));

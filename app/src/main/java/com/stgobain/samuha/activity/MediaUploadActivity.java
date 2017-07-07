@@ -34,8 +34,11 @@ import android.widget.Toast;
 import com.stgobain.samuha.Model.ContextData;
 import com.stgobain.samuha.Model.Parser;
 import com.stgobain.samuha.R;
+import com.stgobain.samuha.network.ApiConfig;
+import com.stgobain.samuha.network.AppConfig;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
+import com.stgobain.samuha.network.ServerResponse;
 import com.stgobain.samuha.utility.AppUtils;
 import com.stgobain.samuha.utility.SharedPrefsUtils;
 
@@ -46,13 +49,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import life.knowledge4.videotrimmer.utils.FileUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.stgobain.samuha.utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
 import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
@@ -61,7 +66,6 @@ import static com.stgobain.samuha.utility.AppUtils.KEY_MESSAGE;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
 import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.utility.AppUtils.POST_MEMORIES;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_CONTEXT_TO_UPLOAD;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_POST_MEMORIES;
@@ -100,6 +104,9 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
     RadioGroup rg;
     boolean isFileSIzeToolarge;
     String eventType = "";
+    private String eventId ="";
+    private String fileType ="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -268,7 +275,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
         try {
             // When an Image is picked
             if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
-
+                fileType ="image";
                 // Get the Image from data
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -350,10 +357,13 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
             } else if (requestCode == EVENT_REQ_CODE && resultCode == Activity.RESULT_OK) {
                 eventContestTag = "#" + data.getStringExtra(RESULT_CONTEXTODE);
                 eventType = data.getStringExtra("Type");
+                if(eventType.equals("Normal"))
+                    eventType = "Event";
+                eventId = data.getStringExtra("Id");
                 str1.setText(eventContestTag);
                 //  Toast.makeText(this, "You selected countrycode: " + eventContestTag, Toast.LENGTH_LONG).show();
             } else if (requestCode == VIDEO_TRIM_CODE && resultCode == Activity.RESULT_OK) {
-
+                fileType ="video";
                 videoPath = data.getStringExtra(VIDEO_TRIM_PATH);
                 //  String[] filePathColumn = {MediaStore.Video.Media.DATA};
                 final Uri videoUri; //= Uri.fromFile(new File(videoPath));
@@ -378,7 +388,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                         });
 
 
-                String strFile = null;
+               /* String strFile = null;
                 File file = new File(videoPath);
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -393,7 +403,7 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                     encImage = Base64.encodeToString(videoBytes, Base64.DEFAULT);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
                 //  Toast.makeText(this, "You selected countrycode: " + eventContestTag, Toast.LENGTH_LONG).show();
             } else {
                 // Toast.makeText(this, "You haven't picked Image/Video", Toast.LENGTH_LONG).show();
@@ -479,11 +489,11 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
     }
 
     private void uploadImage() {
-        if (!TextUtils.isEmpty(encImage) && !TextUtils.isEmpty(eventContestTag)) {
+        if (!TextUtils.isEmpty(eventContestTag)) {
             if (progressDialog != null)
                 progressDialog.show();
-            if (!isFileSIzeToolarge) {
-                String userId = SharedPrefsUtils.getStringPreference(MediaUploadActivity.this, SKEY_ID);
+             /*if (!isFileSIzeToolarge) {
+               String userId = SharedPrefsUtils.getStringPreference(MediaUploadActivity.this, SKEY_ID);
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("user_id", userId);
@@ -494,10 +504,11 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                requestWebservice(jsonObject.toString(), SERVICE_REQUEST_POST_MEMORIES, POST_MEMORIES);
-            } else {
+                requestWebservice(jsonObject.toString(), SERVICE_REQUEST_POST_MEMORIES, POST_MEMORIES);*/
+                uploadFileUsingRetrofit();
+         /*   } else {
                 AppUtils.showAlertDialog(MediaUploadActivity.this, "File size too large too upload");
-            }
+            }*/
         } else if (TextUtils.isEmpty(encImage)) {
             AppUtils.showAlertDialog(MediaUploadActivity.this, "Choose Image or Video to upload!");
         } else {
@@ -613,5 +624,56 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
 
   private void uploadFileUsingRetrofit(){
 
+      // Map is used to multipart the file using okhttp3.RequestBody
+      File file = new File(mediaPath1);
+      String userId = SharedPrefsUtils.getStringPreference(MediaUploadActivity.this, SKEY_ID);
+      // Parsing any Media type file
+      RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+      MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+      RequestBody eId = RequestBody.create(MediaType.parse("text/plain"), eventId);
+      RequestBody eType = RequestBody.create(MediaType.parse("text/plain"), eventType);
+      RequestBody fType = RequestBody.create(MediaType.parse("text/plain"), fileType);
+      RequestBody uId = RequestBody.create(MediaType.parse("text/plain"), userId);
+      Log.d("UPLOAD",eventId + " "+eventType);
+     /* Call<ResponseBody> uploadFileCall = api.uploadFile(
+              RequestBody.create(MediaType.parse("text/plain"), "title"),
+              MultipartBody.Part.createFormData(
+                      "file",
+                      file.getName(),
+                      RequestBody.create(MediaType.parse("image"), file)),
+              new Location(48.8583, 2.29232, "Eiffel Tower"));*/
+      try {
+          ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
+          Call<ServerResponse> call = getResponse.uploadFile(fileToUpload,uId,eType,eId,fType);
+          call.enqueue(new Callback<ServerResponse>() {
+              @Override
+              public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                  ServerResponse serverResponse = response.body();
+                  if (serverResponse != null) {
+                      Log.d("UPLOAD",serverResponse.toString()+" "+serverResponse.getSuccess()+" "+serverResponse.getMessage());
+                      if (serverResponse.getSuccess().equals("false")) {
+                          if(progressDialog!=null)
+                              progressDialog.dismiss();
+                          Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                      } else {
+                          if(progressDialog!=null)
+                              progressDialog.dismiss();
+                          Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                      }
+                  } else {
+                      assert serverResponse != null;
+                      Log.v("Response", serverResponse.toString());
+                  }
+                  progressDialog.dismiss();
+              }
+
+              @Override
+              public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+              }
+          });
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
   }
 }

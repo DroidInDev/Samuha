@@ -315,6 +315,9 @@ public class LoginActivity extends AppCompatActivity implements Receiver, View.O
                 }
                 break;
             case STATUS_ERROR:
+                if (this.progressDialog != null) {
+                    this.progressDialog.dismiss();
+                }
                 AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));

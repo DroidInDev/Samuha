@@ -58,7 +58,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
    // LinearLayout eventLayout;
     CustomFontTextView internalEvtTxt;
     CustomFontTextView comingSoonTxt;
-    ImageView openGrandEvents;
+    ImageView familyday1;
     //Pagination
     private int page = 0;
     private Paginate paginate;
@@ -80,18 +80,44 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
         eventRecyclerView.setAdapter(eventAdaptor);
       //  eventLayout = (LinearLayout) layout.findViewById(R.id.layoutEventFragment);
         internalEvtTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvnt);
-        comingSoonTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvntCn);
-        openGrandEvents = (ImageView)layout.findViewById(R.id.imgGrandArrow);
-        internalEvtTxt.setVisibility(View.INVISIBLE);
-        comingSoonTxt.setVisibility(View.INVISIBLE);
-        openGrandEvents.setVisibility(View.INVISIBLE);
-        openGrandEvents.setOnClickListener(new View.OnClickListener() {
+       // comingSoonTxt = (CustomFontTextView) layout.findViewById(R.id.txtInternalEvntCn);
+        familyday1 = (ImageView)layout.findViewById(R.id.imgGrandArrow);
+       // internalEvtTxt.setVisibility(View.INVISIBLE);
+        //comingSoonTxt.setVisibility(View.INVISIBLE);
+      //  openGrandEvents.setVisibility(View.INVISIBLE);
+        familyday1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TodayEventActivity.class);
-                intent.putExtra("Tittle","Grand Final Events");
+                intent.putExtra("Tittle","Family Day 1");
                 intent.putExtra("From","Event");
-                intent.putExtra("EventList",grandEventArraylist);
+                intent.putExtra("Type","family_day_1");
+           //     intent.putExtra("EventList",grandEventArraylist);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        ImageView familyDay2 = (ImageView)layout.findViewById(R.id.imgGrandArrow1);
+        familyDay2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TodayEventActivity.class);
+                intent.putExtra("Tittle","Family Day 2");
+                intent.putExtra("Type","family_day_2");
+                intent.putExtra("From","Event");
+             //   intent.putExtra("EventList",grandEventArraylist);
+                getActivity().startActivity(intent);
+            }
+        });
+        ImageView grandevent = (ImageView)layout.findViewById(R.id.imgGrandArrow2);
+        grandevent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TodayEventActivity.class);
+                intent.putExtra("Tittle","Grand Finale");
+                intent.putExtra("From","Event");
+                intent.putExtra("Type","grand_final");
+            //    intent.putExtra("EventList",grandEventArraylist);
                 getActivity().startActivity(intent);
             }
         });
@@ -122,13 +148,16 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
         super.setUserVisibleHint(isVisibleToUser);
         // setUpPagination();
         if (isVisibleToUser) {
-            if (this.progressDialog == null) {
-                this.progressDialog = AppUtils.createProgressDialog(getActivity());
-                this.progressDialog.show();
-            } else {
-                this.progressDialog.show();
+            if (getActivity() != null) {
+                if (this.progressDialog == null) {
+                    this.progressDialog = AppUtils.createProgressDialog(getActivity());
+                    this.progressDialog.show();
+                } else {
+                    this.progressDialog.show();
+                }
+                requestEvents();
             }
-            requestEvents();
+
         }
     }
 
@@ -198,15 +227,16 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                             if (this.progressDialog != null) {
                                 this.progressDialog.dismiss();
                                 //  eventArraylist = loadEventsFromAsset();
+                                eventArraylist = Parser.getEventArrayList(result);
                                 eventAdaptor.setEvents(eventArraylist);
                                 internalEvtTxt.setVisibility(View.VISIBLE);
-                                comingSoonTxt.setVisibility(View.VISIBLE);
-                                eventArraylist = Parser.getEventArrayList(result);
-                                if (isGrandFinalEventActive.equals("true")) {
+                              //  comingSoonTxt.setVisibility(View.VISIBLE);
+
+                             /*   if (isGrandFinalEventActive.equals("true")) {
                                   //  openGrandEvents.setVisibility(View.VISIBLE);
-                                    comingSoonTxt.setVisibility(View.INVISIBLE);
+                                 //   comingSoonTxt.setVisibility(View.INVISIBLE);
                                     requestGrandFinalEvents();
-                                }
+                                }*/
                             }
                         } else {
                             if (this.progressDialog != null) {
@@ -220,7 +250,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                             if (this.progressDialog != null) {
                                 this.progressDialog.dismiss();
                                 //  eventArraylist = loadEventsFromAsset();
-                                openGrandEvents.setVisibility(View.VISIBLE);
+                              //  openGrandEvents.setVisibility(View.VISIBLE);
                                 grandEventArraylist =Parser.getEventArrayList(result);
                             }
                         } else {

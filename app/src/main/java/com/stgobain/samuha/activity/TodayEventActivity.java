@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static com.stgobain.samuha.utility.AppUtils.EVENTS_URL;
+import static com.stgobain.samuha.utility.AppUtils.EVENTS_URL_FAMILY;
 import static com.stgobain.samuha.utility.AppUtils.KEY_ERROR;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
 import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
@@ -52,6 +53,7 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
     private TodayEventAdapter todayEventAdapter;
     private RecyclerView recyclerView;
     String fromEventType ="";
+    String eventType ="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +66,13 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
         if(extras!=null){
             activityTittle = extras.getString("Tittle");
             fromEventType = extras.getString("From");
+            eventType = extras.getString("Type");
         }
         if(fromEventType.equals("Event"))
         {
-            todayEventList = extras.getParcelableArrayList("EventList");
+         //   todayEventList = extras.getParcelableArrayList("EventList");
         }
+
         getSupportActionBar().setTitle(activityTittle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.recylerviewTodayEVent);
@@ -82,14 +86,14 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
     protected void onResume() {
         super.onResume();
         if(fromEventType.equals("Event")) {
-            todayEventAdapter.setTodayEvents(todayEventList);
-            recyclerView.setVisibility(View.VISIBLE);
+
+            requestFamilyEvent(EVENTS_URL_FAMILY,eventType);
         }else {
-            requestScore();
+            requestScore(EVENTS_URL,"");
         }
     }
 
-    private void requestScore() {
+    private void requestScore(String url,String eType) {
         if (this.progressDialog == null) {
             this.progressDialog = AppUtils.createProgressDialog(TodayEventActivity.this);
             this.progressDialog.show();
@@ -101,11 +105,30 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(SKEY_EVENT_DATE,sDate);
+            jsonObject.put("type",eType);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.d("TODAY_EVENT ", jsonObject.toString());
-        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_TODAY_EVENT, EVENTS_URL);
+        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_TODAY_EVENT, url);
+    }
+    private void requestFamilyEvent(String url,String eType) {
+        if (this.progressDialog == null) {
+            this.progressDialog = AppUtils.createProgressDialog(TodayEventActivity.this);
+            this.progressDialog.show();
+        } else {
+            this.progressDialog.show();
+        }
+        String userId = SharedPrefsUtils.getStringPreference(TodayEventActivity.this, SKEY_ID);
+        String sDate = getDate();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("type",eType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("TODAY_EVENT ", jsonObject.toString());
+        requestWebservice(jsonObject.toString(), SERVICE_REQUEST_TODAY_EVENT, url);
     }
     private void requestWebservice(String request, int reqID, String url) {
         this.mReceiver = new NetworkServiceResultReceiver(new Handler());

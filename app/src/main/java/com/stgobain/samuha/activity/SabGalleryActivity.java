@@ -73,7 +73,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
     private boolean isDataAvailable = true;
     boolean isSearchDataRequested = false;
     private int itemsAddPagination = 1;
-    protected int itemsPerPage = 5;
+    protected int itemsPerPage = 30;
     private LinearLayoutManager layoutManager;
     private int previousTotal = 0;
     private boolean hasLoadedAll = false;
@@ -209,6 +209,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
     @Override
     public void videoSelected(String videoUrl) {
         Intent intent = new Intent(SabGalleryActivity.this, VideoPrecviewActivity.class);
+        intent.putExtra("videoUrl",videoUrl);
         startActivity(intent);
 
     }
@@ -267,10 +268,7 @@ public class SabGalleryActivity extends AppCompatActivity implements NetworkServ
                             memoryAdaptor.setSabFeeds(sabFeedArraylist);
                             page++;
                             loading = false;
-                            if (totalCount == 0) {
-                                hasLoadedAll = true;
-                                paginate.setHasMoreDataToLoad(false);
-                            } else if (itemsAddPagination >= recordsCount) {
+                            if (totalCount == 0||itemsAddPagination>=totalCount) {
                                 hasLoadedAll = true;
                                 paginate.setHasMoreDataToLoad(false);
                             } else {

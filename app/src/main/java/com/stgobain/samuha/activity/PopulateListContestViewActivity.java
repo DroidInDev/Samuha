@@ -1,10 +1,12 @@
 package com.stgobain.samuha.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -88,6 +90,7 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(RESULT_CONTEXTODE, c.getName());
                 returnIntent.putExtra("Type",c.getType());
+                returnIntent.putExtra("Id",c.getId());
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -194,6 +197,12 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
                             loadListData();
 
                         }
+                        else{
+                            if (this.progressDialog != null) {
+                                this.progressDialog.dismiss();
+                                finish();
+                            }
+                        }
                         Log.d(CONTEST, "FINISHED status " + status + "CONTESTS "+contestList.size());
                         break;
                     case SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD:
@@ -205,6 +214,12 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
                             loadListData();
 
                         }
+                        else{
+                            if (this.progressDialog != null) {
+                                this.progressDialog.dismiss();
+                            }
+                            finish();
+                        }
                         Log.d(CONTEST, "FINISHED status " + status + "CONTESTS "+contestList.size());
                         break;
 
@@ -212,7 +227,28 @@ public class PopulateListContestViewActivity extends AppCompatActivity implement
                 break;
 
             case STATUS_ERROR:
-                AppUtils.showAlertDialog(PopulateListContestViewActivity.this, "Login Failed. Try Again!");
+                if (this.progressDialog != null) {
+                    this.progressDialog.dismiss();
+                }
+               // AppUtils.showAlertDialog(PopulateListContestViewActivity.this, "Network Error. Try Again!");
+               // finish();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        PopulateListContestViewActivity.this);
+                alertDialogBuilder
+                        .setMessage("Network Error. Try Again!")
+                        .setCancelable(true)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close
+                                // current activity
+                                finish();
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
                 break;

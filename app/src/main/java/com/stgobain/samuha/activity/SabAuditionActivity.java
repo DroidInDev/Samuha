@@ -35,10 +35,13 @@ import android.widget.Toast;
 import com.stgobain.samuha.CustomUserInterface.CustomEditTextView;
 import com.stgobain.samuha.Model.ContextData;
 import com.stgobain.samuha.R;
-import com.stgobain.samuha.utility.AppUtils;
-import com.stgobain.samuha.utility.SharedPrefsUtils;
+import com.stgobain.samuha.network.ApiConfig;
+import com.stgobain.samuha.network.AppConfig;
 import com.stgobain.samuha.network.NetworkService;
 import com.stgobain.samuha.network.NetworkServiceResultReceiver;
+import com.stgobain.samuha.network.ServerResponse;
+import com.stgobain.samuha.utility.AppUtils;
+import com.stgobain.samuha.utility.SharedPrefsUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +54,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import life.knowledge4.videotrimmer.utils.FileUtils;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.stgobain.samuha.utility.AppUtils.GET_CONTEXT_TO_UPLOAD_URL;
 import static com.stgobain.samuha.utility.AppUtils.GET_EVENTS_TO_UPLOAD_URL;
@@ -164,6 +173,7 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
                 }
             }
         });
+        rg.clearCheck();
         RadioGroup rgEvent =(RadioGroup) findViewById(R.id.radioFamilyOptionsTag);
         rgEvent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -184,7 +194,7 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
                 }
             }
         });
-
+        rgEvent.clearCheck();
 
 
             // Video must be low in Memory or need to be compressed before uploading...
@@ -494,9 +504,10 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
     }
 
     private void uploadImage() {
-        if (!TextUtils.isEmpty(encImage)) {
+        if (!TextUtils.isEmpty(auditiionType)&&!TextUtils.isEmpty(relationShip)) {
             if (progressDialog != null)
                 progressDialog.show();
+           // uploadFileUsingRetrofit();
             if (!isFileSIzeToolarge) {
                 String descTxtStr = descTxt.getText().toString().trim();
                 String userId = SharedPrefsUtils.getStringPreference(SabAuditionActivity.this, SKEY_ID);
@@ -518,7 +529,7 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
         } else if (TextUtils.isEmpty(encImage)) {
             AppUtils.showAlertDialog(SabAuditionActivity.this, "Choose Image or Video to upload!");
         } else {
-            AppUtils.showAlertDialog(SabAuditionActivity.this, "Choose Relationship!");
+            AppUtils.showAlertDialog(SabAuditionActivity.this, "Choose Relationship and Audition type!");
         }
     }
 
@@ -663,5 +674,60 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
         String selectedText = contestArray[i].toString();
         str1.setText(selectedText);
     }*/
+  private void uploadFileUsingRetrofit(){
+
+      // Map is used to multipart the file using okhttp3.RequestBody
+      File file = new File(mediaPath1);
+      String userId = SharedPrefsUtils.getStringPreference(SabAuditionActivity.this, SKEY_ID);
+      String descTxtStr = descTxt.getText().toString().trim();
+      // Parsing any Media type file
+      RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+      MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+      RequestBody audType = RequestBody.create(MediaType.parse("text/plain"), auditiionType);
+      RequestBody depType = RequestBody.create(MediaType.parse("text/plain"), relationShip);
+      RequestBody shortDesc = RequestBody.create(MediaType.parse("text/plain"), descTxtStr);
+      RequestBody fType = RequestBody.create(MediaType.parse("text/plain"), fileType);
+      RequestBody uId = RequestBody.create(MediaType.parse("text/plain"), userId);
+     /* Call<ResponseBody> uploadFileCall = api.uploadFile(
+              RequestBody.create(MediaType.parse("text/plain"), "title"),
+              MultipartBody.Part.createFormData(
+                      "file",
+                      file.getName(),
+                      RequestBody.create(MediaType.parse("image"), file)),
+              new Location(48.8583, 2.29232, "Eiffel Tower"));*/
+      try {
+          ApiConfig getResponse = AppConfig.getRetrofit().create(ApiConfig.class);
+          Call<ServerResponse> call = getResponse.uploadAuditions(fileToUpload,uId,audType,depType,fType,shortDesc);
+          call.enqueue(new Callback<ServerResponse>() {
+              @Override
+              public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                  ServerResponse serverResponse = response.body();
+                  if (serverResponse != null) {
+                      Log.d("UPLOAD",serverResponse.toString()+" "+serverResponse.getSuccess()+" "+serverResponse.getMessage());
+                      if (serverResponse.getSuccess().equals("false")) {
+                          if(progressDialog!=null)
+                              progressDialog.dismiss();
+                          Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                      } else {
+                          if(progressDialog!=null)
+                              progressDialog.dismiss();
+                          Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                      }
+                  } else {
+                      assert serverResponse != null;
+                      Log.v("Response", serverResponse.toString());
+                  }
+                  progressDialog.dismiss();
+              }
+
+              @Override
+              public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+              }
+          });
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
 }
 

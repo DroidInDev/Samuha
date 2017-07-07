@@ -60,7 +60,7 @@ public class BaseActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.pager);
         setupViewPager(viewPager);
-        viewPager.setCurrentItem(5);
+        viewPager.setCurrentItem(0);
         tabLayout.setupWithViewPager(viewPager);
 
     }

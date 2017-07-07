@@ -76,7 +76,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
     private boolean isDataAvailable = true;
     boolean isSearchDataRequested = false;
     private int itemsAddPagination = 1;
-    protected int itemsPerPage = 2;
+    protected int itemsPerPage = 30;
     private LinearLayoutManager layoutManager;
     private int previousTotal = 0;
     static CircularProgressBar circularProgressBar;
@@ -195,6 +195,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
     @Override
     public void videoSelected(String videoUrl) {
         Intent intent = new Intent(FeedMemoriesActivity.this, VideoPrecviewActivity.class);
+        intent.putExtra("videoUrl",videoUrl);
         startActivity(intent);
 
     }
@@ -282,10 +283,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
                             //  memoryFeedArraylist = loadmemoryFeedsFromAsset();
                             page++;
                             loading = false;
-                            if (totalCount == 0) {
-                                hasLoadedAll = true;
-                                paginate.setHasMoreDataToLoad(false);
-                            } else if (itemsAddPagination >= recordsCount) {
+                            if (totalCount == 0||itemsAddPagination>=totalCount) {
                                 hasLoadedAll = true;
                                 paginate.setHasMoreDataToLoad(false);
                             } else {
@@ -321,7 +319,7 @@ public class FeedMemoriesActivity extends AppCompatActivity implements NetworkSe
 
                             }
 
-                            // AppUtils.showAlertDialog(FeedMemoriesActivity.this, "Network Error!. Try Again!");
+                           //  AppUtils.showAlertDialog(FeedMemoriesActivity.this, "No Data Found!");
                         }
                         break;
                 }

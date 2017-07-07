@@ -174,6 +174,7 @@ public class Parser {
                 ContextData contextData = new ContextData();
                 contextData.setName(jo_inside.getString("name"));
                 contextData.setType(jo_inside.getString("event_type"));
+                contextData.setId(jo_inside.getString("id"));
                 contestsList.add(contextData);
             }
             Log.d("CONTESTS",contestJsonArray.toString());

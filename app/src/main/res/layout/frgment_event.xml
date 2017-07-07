@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="0.8" />
+        android:layout_weight="0.7" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -21,15 +21,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.35"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_marginTop="8dp">
 
             <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
                 android:id="@+id/txtInternalEvnt"
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="@string/grand_events"
+                android:text="@string/family_day1"
 
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
@@ -53,7 +54,7 @@
                 android:layout_marginEnd="15dp"
                 android:src="@drawable/right_arrow_icon" />
 
-            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+           <!-- <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
                 android:id="@+id/txtInternalEvntCn"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
@@ -64,7 +65,89 @@
                 android:textColor="@color/text_tab_unselected"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:font="@string/font_name_square" />-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_marginTop="8dp">
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txtInternalEvnt1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/family_day"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="normal"
                 app:font="@string/font_name_square" />
+
+            <ImageView
+                android:id="@+id/imgGrandArrow1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/txtInternalEvnt1"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/right_arrow_icon" />
+
+            <!-- <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                 android:id="@+id/txtInternalEvntCn"
+                 android:layout_width="wrap_content"
+                 android:layout_height="20dp"
+                 android:layout_below="@id/txtInternalEvnt"
+                 android:layout_marginStart="8dp"
+                 android:layout_marginTop="3dp"
+                 android:text="Coming Soon"
+                 android:textColor="@color/text_tab_unselected"
+                 android:textSize="18sp"
+                 android:textStyle="bold"
+                 app:font="@string/font_name_square" />-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_marginTop="8dp">
+
+            <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                android:id="@+id/txtInternalEvnt2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/grand_events"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:font="@string/font_name_square" />
+
+            <ImageView
+                android:id="@+id/imgGrandArrow2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/txtInternalEvnt2"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/right_arrow_icon" />
+
+            <!-- <com.stgobain.samuha.CustomUserInterface.CustomFontTextView
+                 android:id="@+id/txtInternalEvntCn"
+                 android:layout_width="wrap_content"
+                 android:layout_height="20dp"
+                 android:layout_below="@id/txtInternalEvnt"
+                 android:layout_marginStart="8dp"
+                 android:layout_marginTop="3dp"
+                 android:text="Coming Soon"
+                 android:textColor="@color/text_tab_unselected"
+                 android:textSize="18sp"
+                 android:textStyle="bold"
+                 app:font="@string/font_name_square" />-->
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -53,8 +53,9 @@ public void setScore(ArrayList<SamuhaEvent> scoreArraylist) {
         notifyDataSetChanged();
         }
 
-public void setEvents(ArrayList<SamuhaEvent> todaysEventList) {
-        todayEventList = todaysEventList;
+public void setEvents(ArrayList<SamuhaEvent> eventArrayList) {
+        todayEventList.clear();
+        todayEventList.addAll(eventArrayList);
         notifyDataSetChanged();
         }
 

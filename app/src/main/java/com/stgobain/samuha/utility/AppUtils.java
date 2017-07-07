@@ -17,6 +17,8 @@ import com.stgobain.samuha.R;
 
 public class AppUtils {
 
+    //TODO:: change for production
+    private  static String base_url="live";
     //Key Response
     public static final String SKEY_ID = "id";
     public static final String SKEY_NAME ="name";
@@ -67,25 +69,26 @@ public class AppUtils {
     public static final int  SERVICE_REQUEST_HUB_UPDATES =1018;
     public static final int  SERVICE_REQUEST_GRAND_FINAL_EVENTS =1019;
     //Urls
-    public static final String LOGIN_URL= "http://www.thanjavurkingslionsclub.com/live/v1/login";
-    public static final String INVITE_FAMILY_URL= "http://www.thanjavurkingslionsclub.com/live/v1/invite";
-    public static final String EVENTS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getevents";
-    public static final String TEAMS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getteams";
-    public static final String ANNOUNCEMENT_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getannonucement";
-    public static final String POST_MEMORIES= "http://www.thanjavurkingslionsclub.com/live/v1/postmemories";
-    public static final String GET_CONTEXT_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getcontests";
-    public static final String GET_EVENTS_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getevents";
-    public static final String FEED_MEMORIES_URL= "http://www.thanjavurkingslionsclub.com/live/v1/listmemories";
-    public static final String FEED_MEMORIES_LIKE_URL= "http://www.thanjavurkingslionsclub.com/live/v1/votepostmemories";
-    public static final String SAB_FEED_URL= "http://www.thanjavurkingslionsclub.com/live/v1/listsab";
-    public static final String POST_SAB= "http://www.thanjavurkingslionsclub.com/live/v1/postsab";
-    public static final String FEED_SAB_LIKE_URL= "http://www.thanjavurkingslionsclub.com/live/v1/votepostsab";
-    public static final String CODE_LOGIN_URL= "http://www.thanjavurkingslionsclub.com/live/v1/guestlogin";
-    public static final String HUB_CONTESTS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getcontests";
-    public static final String HUB_UPDATESS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getupdates";
-    public static final String GRAND_FINAL_EVENTS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getgrandfinalevents";
+    public static final String LOGIN_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/login";
+    public static final String INVITE_FAMILY_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/invite";
+    public static final String EVENTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getevents";
+    public static final String EVENTS_URL_FAMILY= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getevents";
+    public static final String TEAMS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getteams";
+    public static final String ANNOUNCEMENT_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getannonucement";
+    public static final String POST_MEMORIES= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/postmemories";
+    public static final String GET_CONTEXT_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getcontests";
+    public static final String GET_EVENTS_TO_UPLOAD_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getevents";
+    public static final String FEED_MEMORIES_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/listmemories";
+    public static final String FEED_MEMORIES_LIKE_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/votepostmemories";
+    public static final String SAB_FEED_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/listsab";
+    public static final String POST_SAB= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/postsab";
+    public static final String FEED_SAB_LIKE_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/votepostsab";
+    public static final String CODE_LOGIN_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/guestlogin";
+    public static final String HUB_CONTESTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getcontests";
+    public static final String HUB_UPDATESS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getupdates";
+    public static final String GRAND_FINAL_EVENTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getgrandfinalevents";
 
-    public static final String GET_EVENTS_AND_CONTEXTS_URL= "http://www.thanjavurkingslionsclub.com/live/v1/getdropdowneventcontest";
+    public static final String GET_EVENTS_AND_CONTEXTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getdropdowneventcontest";
 
 
     public static boolean isNetworkAvailable(Context context) {
