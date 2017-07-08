@@ -81,8 +81,8 @@ public class TodayEventAdapter extends RecyclerView.Adapter<TodayEventAdapter.Vi
         public void onClick(View view) {
             int position = getAdapterPosition();
             if(view.getId()==R.id.imgusericon) {
-                String locationUrl =todayEventList.get(position).getEventLocation();
-                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+                String locationUrl =todayEventList.get(position).getLocUrl();
+                Uri gmmIntentUri = Uri.parse(locationUrl);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(context.getPackageManager()) != null) {

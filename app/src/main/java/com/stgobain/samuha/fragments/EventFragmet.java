@@ -68,7 +68,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
     protected boolean customLoadingListItem = false;
     private static final int GRID_SPAN = 3;
     private String isGrandFinalEventActive;
-
+    private boolean isDataFetched = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -110,7 +110,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
             }
         });
         ImageView grandevent = (ImageView)layout.findViewById(R.id.imgGrandArrow2);
-        grandevent.setOnClickListener(new View.OnClickListener() {
+       /* grandevent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TodayEventActivity.class);
@@ -120,7 +120,11 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
             //    intent.putExtra("EventList",grandEventArraylist);
                 getActivity().startActivity(intent);
             }
-        });
+        });*/
+       if(!isDataFetched){
+           isDataFetched = true;
+           requestEvents();
+       }
         return layout;
     }
 
@@ -155,7 +159,11 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                 } else {
                     this.progressDialog.show();
                 }
-                requestEvents();
+                if(!isDataFetched){
+                    isDataFetched = true;
+                    requestEvents();
+                }
+
             }
 
         }
