@@ -68,7 +68,6 @@ import static com.stgobain.samuha.utility.AppUtils.KEY_MESSAGE;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RECIVER;
 import static com.stgobain.samuha.utility.AppUtils.KEY_REQUEST_ID;
 import static com.stgobain.samuha.utility.AppUtils.KEY_RESULT;
-import static com.stgobain.samuha.utility.AppUtils.POST_SAB;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_CONTEXT_TO_UPLOAD;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_GET_EVENTS_TO_UPLOAD;
 import static com.stgobain.samuha.utility.AppUtils.SERVICE_REQUEST_POST_SAB;
@@ -507,8 +506,8 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
         if (!TextUtils.isEmpty(auditiionType)&&!TextUtils.isEmpty(relationShip)) {
             if (progressDialog != null)
                 progressDialog.show();
-           // uploadFileUsingRetrofit();
-            if (!isFileSIzeToolarge) {
+            uploadFileUsingRetrofit();
+            /*if (!isFileSIzeToolarge) {
                 String descTxtStr = descTxt.getText().toString().trim();
                 String userId = SharedPrefsUtils.getStringPreference(SabAuditionActivity.this, SKEY_ID);
                 JSONObject jsonObject = new JSONObject();
@@ -525,7 +524,7 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
                 requestWebservice(jsonObject.toString(), SERVICE_REQUEST_POST_SAB, POST_SAB);
             } else {
                 AppUtils.showAlertDialog(SabAuditionActivity.this, "File size too large too upload");
-            }
+            }*/
         } else if (TextUtils.isEmpty(encImage)) {
             AppUtils.showAlertDialog(SabAuditionActivity.this, "Choose Image or Video to upload!");
         } else {
@@ -714,8 +713,12 @@ public class SabAuditionActivity extends AppCompatActivity implements NetworkSer
                           Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
                       }
                   } else {
-                      assert serverResponse != null;
-                      Log.v("Response", serverResponse.toString());
+                      try {
+                          assert serverResponse != null;
+                          Log.v("Response", serverResponse.toString());
+                      } catch (Exception e) {
+                          e.printStackTrace();
+                      }
                   }
                   progressDialog.dismiss();
               }

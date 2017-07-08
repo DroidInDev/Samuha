@@ -16,6 +16,16 @@ public class SamuhaEvent implements Parcelable {
     public String shortDescribtion;
     public String latitude;
     public String locUrl;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String time;
     public String getLatitude() {
         return latitude;
     }

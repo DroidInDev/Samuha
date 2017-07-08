@@ -89,11 +89,11 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
 
             requestFamilyEvent(EVENTS_URL_FAMILY,eventType);
         }else {
-            requestScore(EVENTS_URL,"");
+            requestOtherEvents(EVENTS_URL,"");
         }
     }
 
-    private void requestScore(String url,String eType) {
+    private void requestOtherEvents(String url,String eType) {
         if (this.progressDialog == null) {
             this.progressDialog = AppUtils.createProgressDialog(TodayEventActivity.this);
             this.progressDialog.show();
@@ -178,6 +178,7 @@ public class TodayEventActivity extends AppCompatActivity implements NetworkServ
                         this.progressDialog.dismiss();
                     }
                 } else {
+                    AppUtils.showAlertDialog(TodayEventActivity.this, "Events will be updated Shortly!");
                    /* SharedPrefsUtils.setBooleanPreference(LoginActivity.this, KEY_IS_LOGED_IN, false);
                     AppUtils.showAlertDialog(LoginActivity.this, "Login Failed. Try Again!");*/
                 }

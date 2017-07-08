@@ -85,7 +85,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
        // internalEvtTxt.setVisibility(View.INVISIBLE);
         //comingSoonTxt.setVisibility(View.INVISIBLE);
       //  openGrandEvents.setVisibility(View.INVISIBLE);
-        familyday1.setOnClickListener(new View.OnClickListener() {
+      /*  familyday1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TodayEventActivity.class);
@@ -95,7 +95,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
            //     intent.putExtra("EventList",grandEventArraylist);
                 getActivity().startActivity(intent);
             }
-        });
+        });*/
 
         ImageView familyDay2 = (ImageView)layout.findViewById(R.id.imgGrandArrow1);
         familyDay2.setOnClickListener(new View.OnClickListener() {

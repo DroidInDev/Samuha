@@ -49,13 +49,15 @@ public class MemoryFeedAdapter  extends RecyclerView.Adapter<MemoryFeedAdapter.V
         holder.memoryDateTxt.setText(currentMemory.getPost_date());
         holder.memoryNameTxt.setText(currentMemory.getEvent_name());
         holder.memoryDescTxt.setText("Total votes :"+currentMemory.getTotal_vote());
+
         if(currentMemory.getFile_type().equals("video")){
             holder.playImg.setVisibility(View.VISIBLE);
         }else
         {
             holder.playImg.setVisibility(View.INVISIBLE);
         }
-        if(currentMemory.getUser_vote_status().equals("true")){
+        //getUser_vote_status() - false --already voted
+        if(currentMemory.getUser_vote_status().equals("false")){
             holder.likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.voted_icon));
         }else{
             holder.likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vote_icon));
@@ -120,9 +122,14 @@ public class MemoryFeedAdapter  extends RecyclerView.Adapter<MemoryFeedAdapter.V
             int position = getAdapterPosition();
             MemeoriesData memeoriesData = samuhaMemoryArrayList.get(position);
             if(view.getId()==R.id.imgLocationIcon){
-                if(memeoriesData.getUser_vote_status().equals("false")){
-                    samuhaMemoryArrayList.get(position).setUser_vote_status("true");
+                if(memeoriesData.getUser_vote_status().equals("true")){
+                    samuhaMemoryArrayList.get(position).setUser_vote_status("false");
                     likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.voted_icon));
+                    String voteCount = memeoriesData.getTotal_vote();
+                    int vCount = Integer.valueOf(voteCount);
+                    vCount++;
+                    memeoriesData.setTotal_vote(vCount+"");
+                    notifyDataSetChanged();
                 }
                 mActionListener.likeClicked(memeoriesData.getId());
             }else if(view.getId()==R.id.imgplay){

@@ -40,6 +40,7 @@ public class TodayEventAdapter extends RecyclerView.Adapter<TodayEventAdapter.Vi
         SamuhaEvent currentEvent = todayEventList.get(position);
         holder.todayEventTxt.setText(currentEvent.getEventName());
         holder.todayEventDatetxt.setText(currentEvent.getEventDate());
+        holder.todayEventTimeTxt.setText(currentEvent.getTime());
         holder.todayEventLocationTxt.setText(currentEvent.getEventLocation());
     }
 
@@ -63,12 +64,14 @@ public class TodayEventAdapter extends RecyclerView.Adapter<TodayEventAdapter.Vi
         CustomFontTextView todayEventTxt;
         CustomFontTextView todayEventDatetxt;
         CustomFontTextView todayEventLocationTxt;
+        CustomFontTextView todayEventTimeTxt;
         ImageView imgLoactionIcon;
         public ViewHoldertodayEvent(View itemView) {
             super(itemView);
             todayEventTxt = (CustomFontTextView)itemView.findViewById(R.id.txttodayEventName);
             todayEventDatetxt = (CustomFontTextView)itemView.findViewById(R.id.txttodayEventDate);
             todayEventLocationTxt =(CustomFontTextView)itemView.findViewById(R.id.txttodayEventLocation);
+            todayEventTimeTxt =(CustomFontTextView)itemView.findViewById(R.id.txttodayEventTime);
             imgLoactionIcon =(ImageView)itemView.findViewById(R.id.imgusericon);
             imgLoactionIcon.setOnClickListener(this);
             itemView.setOnClickListener(this);

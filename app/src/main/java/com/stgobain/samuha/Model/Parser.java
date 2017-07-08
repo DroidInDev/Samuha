@@ -29,18 +29,22 @@ public class Parser {
           //  Log.d("EVENTS",eventsArray.toString());
             for (int i = 0; i < eventsArray.length(); i++) {
                 JSONObject eventObject = eventsArray.getJSONObject(i);
-                String id;
-                String eventDate;
-                String eventName;
-                String eventLocation;
-                String imageUrl;
-                String shortDescribtion;
+                String id ="";
+                String eventDate="";
+                String eventName="";
+                String eventLocation="";
+                String imageUrl="";
+                String shortDescribtion="";
+                String time ="";
                 id = eventObject.getString(SKEY_ID);
                 eventDate = eventObject.getString("eventdate");
                 eventName = eventObject.getString(SKEY_NAME);
                 eventLocation = eventObject.getString(SKEY_LOCATION);
                 imageUrl = eventObject.getString(SKEY_IMAGE_URL);
                 shortDescribtion = eventObject.getString(SKEY_DESCRIPTION);
+                if(contains(eventObject,"time_string")){
+                    time = eventObject.getString("time_string");
+                }
                 SamuhaEvent samuhaEvent = new SamuhaEvent();
                 samuhaEvent.setId(id);
                 samuhaEvent.setEventDate(eventDate);
@@ -50,6 +54,7 @@ public class Parser {
                 samuhaEvent.setShortDescribtion(shortDescribtion);
                 samuhaEvent.setLatitude(eventObject.getString("latitude"));
                 samuhaEvent.setLongititude(eventObject.getString("longititude"));
+                samuhaEvent.setTime(time);
                 String locUrl ="geo:"+eventObject.getString("latitude")+","+eventObject.getString("longititude");
                 samuhaEvent.setLocUrl(locUrl);
                 samuhaEventArrayList.add(samuhaEvent);
@@ -349,4 +354,7 @@ public class Parser {
         }
         return samuhaEventArrayList;
     }*/
+ public static boolean contains(JSONObject jsonObject, String key) {
+     return jsonObject != null && jsonObject.has(key) && !jsonObject.isNull(key) ? true : false;
+ }
 }

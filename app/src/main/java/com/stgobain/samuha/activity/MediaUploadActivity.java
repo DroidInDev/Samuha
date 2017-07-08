@@ -661,8 +661,12 @@ public class MediaUploadActivity extends AppCompatActivity implements NetworkSer
                           Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
                       }
                   } else {
-                      assert serverResponse != null;
-                      Log.v("Response", serverResponse.toString());
+                      try {
+                          assert serverResponse != null;
+                          Log.v("Response", serverResponse.toString());
+                      } catch (Exception e) {
+                          e.printStackTrace();
+                      }
                   }
                   progressDialog.dismiss();
               }

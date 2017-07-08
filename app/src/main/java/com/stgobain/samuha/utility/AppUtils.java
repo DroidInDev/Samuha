@@ -1,5 +1,6 @@
 package com.stgobain.samuha.utility;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -72,7 +73,7 @@ public class AppUtils {
     public static final String LOGIN_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/login";
     public static final String INVITE_FAMILY_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/invite";
     public static final String EVENTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getevents";
-    public static final String EVENTS_URL_FAMILY= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getevents";
+    public static final String EVENTS_URL_FAMILY= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/geteventsandroid";
     public static final String TEAMS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getteams";
     public static final String ANNOUNCEMENT_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getannonucement";
     public static final String POST_MEMORIES= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/postmemories";
@@ -96,24 +97,32 @@ public class AppUtils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static void showAlertDialog(Context context, String message) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-        alertDialogBuilder
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, close
-                        // current activity
+    public static void showAlertDialog(Activity activity, String message) {
+       /*  final WeakReference<Activity> dialogWeakRef = new WeakReference<Activity>(activity);
+        if(dialogWeakRef.get()!=null&&dialogWeakRef.get().isFinishing()) {*/
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    activity);
+            alertDialogBuilder
+                    .setMessage(message)
+                    .setCancelable(true)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, close
+                            // current activity
 
-                    }
-                });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+                        }
+                    });
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
+            // show it
+
+            try {
+                alertDialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+      //  }
     }
 
     public static ProgressDialog createProgressDialog(Context mContext) {

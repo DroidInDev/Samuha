@@ -55,7 +55,7 @@ public class SabFeedAdapter  extends RecyclerView.Adapter<SabFeedAdapter.ViewHol
         {
             holder.playImg.setVisibility(View.INVISIBLE);
         }
-        if(currentMemory.getUserVoteStatus().equals("true")){
+        if(currentMemory.getUserVoteStatus().equals("false")){
             holder.likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.voted_icon));
         }else{
             holder.likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vote_icon));
@@ -121,9 +121,14 @@ public class SabFeedAdapter  extends RecyclerView.Adapter<SabFeedAdapter.ViewHol
             int position = getAdapterPosition();
             SabData memeoriesData = samuhaMemoryArrayList.get(position);
             if(view.getId()==R.id.imgLocationIcon){
-                if(memeoriesData.getUserVoteStatus().equals("false")){
-                    samuhaMemoryArrayList.get(position).setUserVoteStatus("true");
+                if(memeoriesData.getUserVoteStatus().equals("true")){
+                    samuhaMemoryArrayList.get(position).setUserVoteStatus("false");
                     likeImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.voted_icon));
+                    String voteCount = memeoriesData.getTotalVote();
+                    int vCount = Integer.valueOf(voteCount);
+                    vCount++;
+                    memeoriesData.setTotalVote(vCount+"");
+                    notifyDataSetChanged();
                 }
                 mActionListener.likeClicked(memeoriesData.getId());
             }else if(view.getId()==R.id.imgplay){
