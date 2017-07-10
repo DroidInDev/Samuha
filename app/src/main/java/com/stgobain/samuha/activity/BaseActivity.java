@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
     private static final String MEMORIES = "Memories";
     private static final String HUB = "HUB";
     private static final String SAB = "SAB";
-
+    private String[] pageTitle = {HOME,THEME,TEAM,EVENTS,MASCOTS,MEMORIES,HUB,SAB};
     //This is our tablayout
     private TabLayout tabLayout;
 
@@ -55,12 +55,39 @@ public class BaseActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setLogo(R.drawable.samuha_logo);
         //Initializing the tablayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.pager);
+        for (int i = 0; i < pageTitle.length; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
+        }
         setupViewPager(viewPager);
-        viewPager.setCurrentItem(0);
+        //viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(5);
+        viewPager.clearOnPageChangeListeners();
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         tabLayout.setupWithViewPager(viewPager);
 
     }
@@ -80,7 +107,7 @@ public class BaseActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 

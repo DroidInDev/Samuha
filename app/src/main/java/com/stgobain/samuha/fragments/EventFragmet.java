@@ -106,7 +106,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                 intent.putExtra("Type","family_day_2");
                 intent.putExtra("From","Event");
              //   intent.putExtra("EventList",grandEventArraylist);
-                getActivity().startActivity(intent);
+                getContext().startActivity(intent);
             }
         });
         ImageView grandevent = (ImageView)layout.findViewById(R.id.imgGrandArrow2);
@@ -121,10 +121,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                 getActivity().startActivity(intent);
             }
         });*/
-       if(!isDataFetched){
-           isDataFetched = true;
-           requestEvents();
-       }
+
         return layout;
     }
 
@@ -152,18 +149,15 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
         super.setUserVisibleHint(isVisibleToUser);
         // setUpPagination();
         if (isVisibleToUser) {
-            if (getActivity() != null) {
+            if (getContext() != null) {
                 if (this.progressDialog == null) {
-                    this.progressDialog = AppUtils.createProgressDialog(getActivity());
+                    this.progressDialog = AppUtils.createProgressDialog(getContext());
                     this.progressDialog.show();
                 } else {
                     this.progressDialog.show();
                 }
-                if(!isDataFetched){
-                    isDataFetched = true;
-                    requestEvents();
-                }
-
+                requestEvents();
+             //  requestEvents();
             }
 
         }
@@ -201,12 +195,12 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
     private void requestWebservice(String request, int reqID, String url) {
         this.mReceiver = new NetworkServiceResultReceiver(new Handler());
         this.mReceiver.setReceiver(this);
-        Intent intent = new Intent("android.intent.action.SYNC", null, getActivity(), NetworkService.class);
+        Intent intent = new Intent("android.intent.action.SYNC", null, getContext(), NetworkService.class);
         intent.putExtra("url", url);
         intent.putExtra(KEY_RECIVER, this.mReceiver);
         intent.putExtra(KEY_REQUEST_ID, String.valueOf(reqID));
         intent.putExtra("request", request);
-        getActivity().startService(intent);
+       getContext().startService(intent);
     }
 
     @Override
@@ -250,7 +244,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                             if (this.progressDialog != null) {
                                 progressDialog.dismiss();
                             }
-                            AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
+                       //     AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
                         }
                         break;
                     case SERVICE_REQUEST_GRAND_FINAL_EVENTS:
@@ -265,7 +259,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                             if (this.progressDialog != null) {
                                 progressDialog.dismiss();
                             }
-                            AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
+                          //  AppUtils.showAlertDialog(getActivity(), "Internet Error!. Try Again!");
                         }
                         break;
                 }
@@ -274,7 +268,7 @@ public class EventFragmet extends Fragment implements NetworkServiceResultReceiv
                 if (this.progressDialog != null) {
                     progressDialog.dismiss();
                 }
-                AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
+             //   AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
                 break;

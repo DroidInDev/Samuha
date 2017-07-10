@@ -127,7 +127,7 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
         intent.putExtra(KEY_RECIVER, this.mReceiver);
         intent.putExtra(KEY_REQUEST_ID, String.valueOf(reqID));
         intent.putExtra("request", request);
-        getActivity().startService(intent);
+       getContext().startService(intent);
     }
 
     @Override
@@ -135,14 +135,14 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
         super.setUserVisibleHint(isVisibleToUser);
         // setUpPagination();
         if (isVisibleToUser) {
-            if (getActivity() != null) {
+            if (getContext() != null) {
                 if (this.progressDialog == null) {
                     this.progressDialog = AppUtils.createProgressDialog(getActivity());
                     this.progressDialog.show();
                 } else {
                     this.progressDialog.show();
                 }
-                requestTeam();
+               requestTeam();
             }
 
         }
@@ -192,7 +192,7 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
                     }
                 } else {
 
-                    AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
+               //     AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
                 }
                 Log.d("LOGIN", "FINISHED status " + status + " ");
                 break;
@@ -200,7 +200,7 @@ public class TeamFragment extends Fragment implements NetworkServiceResultReceiv
                 if (this.progressDialog != null) {
                     progressDialog.dismiss();
                 }
-                AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
+             //   AppUtils.showAlertDialog(getActivity(), "Network Error!. Try Again!");
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
                 break;
