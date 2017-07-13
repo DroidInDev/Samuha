@@ -137,7 +137,7 @@ public class ScoreActivity extends AppCompatActivity implements NetworkServiceRe
                 Log.d("LOGIN", "FINISHED status " + status + " " );
                 break;
             case STATUS_ERROR:
-                AppUtils.showAlertDialog(ScoreActivity.this, "Login Failed. Try Again!");
+                AppUtils.showAlertDialog(ScoreActivity.this, "Network Error. Try Again!");
                 Log.d("LOGIN", "STATUS_ERROR");
                 Log.d("LOGIN", "SERVICE RESPONSE ERROR " + resultData.getString("android.intent.extra.TEXT"));
                 break;
