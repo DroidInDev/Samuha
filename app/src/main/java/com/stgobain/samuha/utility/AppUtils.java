@@ -69,6 +69,7 @@ public class AppUtils {
     public static final int  SERVICE_REQUEST_HUB_CONTESTS  =1016;
     public static final int  SERVICE_REQUEST_HUB_UPDATES =1018;
     public static final int  SERVICE_REQUEST_GRAND_FINAL_EVENTS =1019;
+    public static final int  FCM_REGISTRATION_REQ_ID =1020;
     //Urls
     public static final String LOGIN_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/login";
     public static final String INVITE_FAMILY_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/invite";
@@ -88,6 +89,7 @@ public class AppUtils {
     public static final String HUB_CONTESTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getcontests";
     public static final String HUB_UPDATESS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getupdates";
     public static final String GRAND_FINAL_EVENTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getgrandfinalevents";
+    public static final String FCM_REGISTRATION_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/deviceregister";
 
     public static final String GET_EVENTS_AND_CONTEXTS_URL= "http://www.thanjavurkingslionsclub.com/"+base_url+"/v1/getdropdowneventcontest";
 

@@ -43,6 +43,19 @@
         <activity android:name=".activity.ImageViewActivity" />
 
         <service android:name="com.stgobain.samuha.network.NetworkService" android:exported="false" />
+        <!-- Firebase Notifications -->
+        <service android:name=".notofication.SamuhaFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".notofication.SamuhaFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- ./Firebase Notifications -->
     </application>
 
 </manifest>

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "647703269191",
+    "firebase_url": "https://samuha-c4c81.firebaseio.com",
+    "project_id": "samuha-c4c81",
+    "storage_bucket": "samuha-c4c81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647703269191:android:352ad643cb31554a",
+        "android_client_info": {
+          "package_name": "com.stgobain.samuha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647703269191-0mj07cc1idag2lofntihs9tp7bk775r6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stgobain.samuha",
+            "certificate_hash": "d926be8fa692ac0978aa7ef3f17a1dcb8b6bb3af"
+          }
+        },
+        {
+          "client_id": "647703269191-reb8cgfokt9mibk5h635m1gll1fdkj4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stgobain.samuha",
+            "certificate_hash": "fcd843735bdf6adc326d70c85137f1b6e2f30230"
+          }
+        },
+        {
+          "client_id": "647703269191-gm18eh7ekpndov12s7b35u0b38drtnl5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4dYnxbDPlI-VbQ94CB8-TDDOMR0-g9Kw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647703269191-gm18eh7ekpndov12s7b35u0b38drtnl5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
